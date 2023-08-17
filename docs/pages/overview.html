@@ -1,0 +1,45 @@
+<div class="page-content">
+  <h1>Overview</h1>
+  <p>
+    <a class="link" href="https://github.com/prettygoodcapital/finance-widgets">finance-widgets</a> is a library of simple but extensible UI widgets for financial applications.
+    Each widget is designed as a standalone <a class="link" href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components">WebComponent</a>, and the libary relies on <a class="link" href="https://lit.dev/">Lit</a> and <a class="link" href="https://shoelace.style/">Shoelace</a> for the bulk of the UI heavy lifting.
+  </p>
+  
+  <sl-alert open>
+    <sl-icon slot="icon" name="info-circle"></sl-icon>
+    This library is in pre-alpha stage and is not yet suitable for production usage.
+  </sl-alert>
+  
+  <sl-divider></sl-divider>
+  <h2>Installation</h2>
+  
+  <h3 class="mt10">Data Models</h3>
+  <p>
+    Data models represent data types that are required for widgets to function.
+    This data is JSON based, with typescript typings automatically generated from <a href="https://json-schema.org/">JSON Schema</a>.
+    <span class="code">Providers</span> can be instantiated in a <span class="code">Context</span> in order to automatically bind data providers to collections of widgets (more on this below).
+  </p>
+  <p class="align-center">
+    <code id="installation-code-1">npm i @finance-widgets/core</code>
+    <sl-copy-button from="installation-code-1"></sl-copy-button>
+  </p>
+  
+  <h3 class="mt10">UI Components</h3>
+  <p>
+    Core widgets, available as <a class="link" href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components">WebComponents</a>.
+    Browse the available widgets on the left side bar of this page.
+  </p>
+  <p class="align-center">
+    <code id="installation-code-2">npm i @finance-widgets/core-ui</code>
+    <sl-copy-button from="installation-code-2"></sl-copy-button>
+  </p>
+  
+  <h3 class="mt10">Providers</h3>
+  <p>
+    Providers bind data models to widgets. These are designed to be implemented by the end user for their own data sources, but a few are provided.
+  </p>
+  <p class="align-center">
+    <code id="installation-code-2">npm i @finance-widgets/provider</code>
+    <sl-copy-button from="installation-code-2"></sl-copy-button>
+  </p>
+</div>

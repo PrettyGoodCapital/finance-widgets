@@ -1,0 +1,32 @@
+{
+  "title": "QuoteData",
+  "type": "object",
+  "properties": {
+    "ticker": {
+      "description": "Ticker or identifier",
+      "type": "string"
+    },
+    "name": {
+      "description": "Name of asset",
+      "type": "string"
+    },
+    "market": {
+      "description": "Name of asset's market",
+      "type": "string"
+    },
+    "price": {
+      "description": "Current price",
+      "type": "number"
+    },
+    "change": {
+      "description": "Price change from previous",
+      "type": "number"
+    },
+    "changePercent": {
+      "description": "Price change from previous",
+      "type": "number"
+    }
+  },
+  "additionalProperties": false,
+  "required": ["ticker", "name", "price", "change"]
+}

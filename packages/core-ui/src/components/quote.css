@@ -1,0 +1,26 @@
+:host {
+}
+
+.name,
+.ticker {
+  font-size: var(--sl-font-size-large);
+}
+
+.market {
+  margin-top: 5px;
+  font-size: var(--sl-font-size-x-small);
+}
+
+.price {
+  font-size: var(--sl-font-size-2x-large);
+  margin-right: 5px;
+}
+
+.change {
+  font-size: var(--sl-font-size-x-large);
+  margin-right: 5px;
+}
+
+.changePercent {
+  font-size: var(--sl-font-size-x-large);
+}

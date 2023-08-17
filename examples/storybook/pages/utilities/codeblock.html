@@ -1,0 +1,59 @@
+<div class="page-content">
+  <h1>Code Block</h1>
+
+  <sl-alert open>
+    <sl-icon slot="icon" name="info-circle"></sl-icon>
+    This library is in pre-alpha stage and is not yet suitable for production usage.
+  </sl-alert>
+
+  <fw-utils-codeusage code="<fw-utils-codeblock
+  language=&quot;python&quot;
+  code=&quot;
+    import os
+    print('hello world')&quot;>
+</fw-utils-codeblock>">
+    <div class="description" slot="description">
+      <div>
+        <p>
+          A component to render a block of code in a nice <span class="mono">monospace font</span>, using <code><a href="https://highlightjs.org/">highlight.js</a></code>.
+        </p>
+      </div>
+      <div>
+        <h4 class="bold">Attributes</h4>
+        <ul>
+          <li>
+            <div class="attributes">
+              <span class="bold">
+                language
+              </span>
+              <code>
+                String
+              </code>
+              <span>
+                The language for which to render.
+              </span>
+            </div>
+          </li>
+          <li>
+            <div class="attributes">
+              <span class="bold">
+                code
+              </span>
+              <code>
+                String
+              </code>
+              <span>
+                The code to render.
+              </span>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+    <fw-utils-codeblock slot="example" code="
+import os
+print('hello world')
+    " language="python"></fw-utils-codeblock>
+  </fw-utils-codeusage>
+</div>

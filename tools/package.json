@@ -1,0 +1,30 @@
+{
+  "name": "@finance-widgets/tools",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Core finance widgets",
+  "repository": "git@github.com:prettygoodcapital/finance-widgets.git",
+  "author": "prettygoodcapital <prettygoodcapital@gmail.com>",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "dist/core.js",
+  "module": "src/core.js",
+  "browser": "dist/core.js",
+  "unpkg": "dist/core.js",
+  "jsdelivr": "dist/core.js",
+  "files": [
+    "dist/*"
+  ],
+  "scripts": {
+    "build": ":",
+    "watch": ":",
+    "clean": ":",
+    "fix": "yarn lint --fix",
+    "lint": "eslint --ext js --ext json .",
+    "test": ":"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {}
+}
