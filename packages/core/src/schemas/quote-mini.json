@@ -1,0 +1,20 @@
+{
+  "title": "QuoteMiniData",
+  "type": "object",
+  "properties": {
+    "ticker": {
+      "description": "Ticker or identifier",
+      "type": "string"
+    },
+    "price": {
+      "description": "Current price",
+      "type": "number"
+    },
+    "change": {
+      "description": "Price change from previous",
+      "type": "number"
+    }
+  },
+  "additionalProperties": false,
+  "required": ["ticker", "price", "change"]
+}

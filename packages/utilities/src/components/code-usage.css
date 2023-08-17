@@ -1,0 +1,30 @@
+:host {
+  display: block;
+  overflow: hidden;
+}
+
+pre {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+.align-center {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  padding: 0;
+  margin: 0;
+}
+
+p {
+  padding: 0;
+  margin: 0;
+}
+
+.header {
+  font-weight: var(--sl-font-weight-normal) !important;
+}

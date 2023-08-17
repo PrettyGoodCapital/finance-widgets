@@ -1,0 +1,85 @@
+:host {
+  display: block;
+  /* margin: auto; */
+  height: 50px;
+  overflow: hidden;
+  position: relative;
+  font-family: var(--sl-font-mono);
+}
+
+.trending-up::after {
+  font-family: "Material Icons";
+  content: "trending_up"
+}
+  
+.trending-down::after {
+  font-family: "Material Icons";
+  content: "trending_down"
+}
+
+.trending-flat::after {
+  font-family: "Material Icons";
+  content: "trending_flat"
+}
+
+.marquee,
+.marquee2 {
+  font-size: 3em;
+  position: absolute;
+  display: flex;
+  margin: 0;
+  line-height: 50px;
+  text-align: center;
+}
+  
+.marquee {
+  /* Starting position */
+  -moz-transform:translateX(100%);
+  -webkit-transform:translateX(100%);	
+  transform:translateX(100%);
+    
+  /* Apply animation to this element */	
+  -moz-animation: marquee var(--time-delay) linear infinite;
+  -webkit-animation: marquee var(--time-delay) linear infinite;
+  animation: marquee var(--time-delay) linear infinite;
+  animation-delay: calc(-1 * var(--time-delay) / 2);
+}
+
+.marquee2 {
+  /* Starting position */
+  -moz-transform:translateX(200%);
+  -webkit-transform:translateX(200%);	
+  transform:translateX(200%);
+    
+  /* Apply animation to this element */	
+  -moz-animation: marquee var(--time-delay) linear infinite;
+  -webkit-animation: marquee var(--time-delay) linear infinite;
+  animation: marquee var(--time-delay) linear infinite;
+}
+
+@keyframes marquee {
+0%   { 
+  -moz-transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+}
+100% { 
+  -moz-transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+}
+}
+
+@keyframes marquee2 {
+0%   { 
+  -moz-transform: translateX(200%);
+  -webkit-transform: translateX(200%);
+  transform: translateX(200%);
+}
+    
+100% { 
+  -moz-transform: translateX(0%);
+  -webkit-transform: translateX(0%);
+  transform: translateX(0%);
+}
+}
