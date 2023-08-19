@@ -1,6 +1,11 @@
 import { html, css, unsafeCSS, LitElement } from "lit";
 import { property, state } from "lit/decorators.js";
-import { createIfNotDefined, QuoteData } from "@finance-widgets/core";
+import { ContextConsumer } from "@lit-labs/context";
+import {
+  createIfNotDefined,
+  QuoteData,
+  SingleProviderContext,
+} from "@finance-widgets/core";
 import { WidgetBase, baseStyle } from "../base";
 
 import quoteStyle from "./quote.css";
@@ -11,23 +16,25 @@ export class Quote extends WidgetBase(LitElement) {
   @property({ type: Object })
   data: QuoteData = null;
 
-  @state()
-  protected _ticker: string = "";
+  provider = new ContextConsumer(this, {
+    context: SingleProviderContext,
+    subscribe: true,
+  });
 
   @state()
-  protected _name: string = "";
+  protected _ticker: string = "-";
+
+  @state()
+  protected _name: string = "--";
 
   @state()
   protected _market: string = "";
 
   @state()
-  protected _price: number = null;
+  protected _price: number = 0.0;
 
   @state()
-  protected _change: number = null;
-
-  @state()
-  protected _changePercent: number = null;
+  protected _change: number = 0.0;
 
   @property({ type: String })
   color_positive = "var(--sl-color-success-500)";
@@ -40,33 +47,37 @@ export class Quote extends WidgetBase(LitElement) {
 
   protected _updateData() {
     this.data = {
-      ticker: this._ticker,
-      name: this._name,
+      ticker: this._ticker || "-",
+      name: this._name || "--",
       market: this._market,
-      price: this._price,
-      change: this._change,
-      changePercent: this._changePercent,
+      price: this._price || 0.0,
+      change: this._change || 0.0,
     };
     this.requestUpdate();
   }
 
-  updateData(newPrice: number, newChange: number, newChangePercent?: number) {
+  updateData(newPrice: number, newChange: number) {
     this._price = newPrice;
     this._change = newChange;
-    this._changePercent = newChangePercent;
     this._updateData();
   }
 
   render() {
-    if (this.data) {
-      const { ticker, name, market, price, change, changePercent } = this.data;
-      this._ticker = ticker;
-      this._name = name;
-      this._market = market;
-      this._price = price;
-      this._change = change;
-      this._changePercent = changePercent;
+    let data;
+    if (this.provider.value) {
+      this.provider.value.registerQuote(this);
+      data = this.provider.value.getQuote();
+    } else if (this.data) {
+      data = this.data;
     }
+
+    const { ticker, name, market, price, change } = data;
+    this._ticker = ticker || "-";
+    this._name = name || "--";
+    this._market = market;
+    this._price = price || 0.0;
+    this._change = change || 0.0;
+    const _changePercent = change / (price - change);
 
     const contents = html!`
       <div key=${this._ticker} class="col">
@@ -82,10 +93,8 @@ export class Quote extends WidgetBase(LitElement) {
           <div class="row ${
             this._change === 0 ? "flat" : this._change > 0 ? "up" : "down"
           }">
-            <span class="change">${this._change.toFixed(2)}</span>
-            <span class="changePercent">(${this._changePercent.toFixed(
-              2,
-            )}%)</span>
+            <span class="change">${this._change?.toFixed(2)}</span>
+            <span class="changePercent">(${_changePercent.toFixed(2)}%)</span>
           </div>
         </div>
       </div>`;

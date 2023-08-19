@@ -5,17 +5,13 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export interface ChartData {
+export interface ExchangeData {
   /**
-   * Ticker or identifier
+   * Code or identifier
    */
-  ticker: string;
+  code: string;
   /**
-   * Array of prices
+   * Name of asset
    */
-  price: number[];
-  /**
-   * Array of indexes for prices (most likely timestamps)
-   */
-  index: number[];
+  name?: string;
 }

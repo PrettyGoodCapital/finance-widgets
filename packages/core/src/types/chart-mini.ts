@@ -5,25 +5,17 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export interface QuoteData {
+export interface ChartMiniData {
   /**
    * Ticker or identifier
    */
   ticker: string;
   /**
-   * Name of asset
+   * Array of prices
    */
-  name: string;
+  price: number[];
   /**
-   * Name of asset's market
+   * Array of indexes for prices (most likely timestamps)
    */
-  market?: string;
-  /**
-   * Current price
-   */
-  price: number;
-  /**
-   * Price change from previous
-   */
-  change: number;
+  index: number[];
 }
