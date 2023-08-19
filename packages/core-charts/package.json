@@ -1,0 +1,39 @@
+{
+  "name": "@finance-widgets/core-charts",
+  "version": "0.1.0",
+  "description": "Core finance widgets",
+  "repository": "git@github.com:prettygoodcapital/finance-widgets.git",
+  "author": "prettygoodcapital <prettygoodcapital@gmail.com>",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "browser": "dist/index.js",
+  "unpkg": "dist/index.js",
+  "jsdelivr": "dist/index.js",
+  "files": [
+    "dist/*"
+  ],
+  "scripts": {
+    "build:esbuild": "node build.js",
+    "build:tsc": "tsc",
+    "build": "npm-run-all -p build:*",
+    "watch:esbuild": "yarn build:esbuild --watch",
+    "watch": "npm-run-all -p watch:*",
+    "clean": "rimraf dist lib coverage junit.xml",
+    "fix": "yarn lint --fix",
+    "lint": "eslint --ext js --ext ts src/ build.js",
+    "test": "NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --config .jestrc.js --forceExit --coverage"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@finance-widgets/core": "^0.1.0",
+    "@finance-widgets/core-ui": "^0.1.0",
+    "@lit-labs/context": "^0.4.0",
+    "@shoelace-style/shoelace": "^2.7.0",
+    "d3fc": "^15.2.6",
+    "lit": "^2.8.0"
+  }
+}
