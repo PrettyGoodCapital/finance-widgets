@@ -1,7 +1,7 @@
 {
-    "extends": "../../tools/tsconfig",
-    "compilerOptions": {
-        "outDir": "dist/",
-        "rootDir": "src/"
-    }
+  "extends": "../../tools/tsconfig",
+  "compilerOptions": {
+    "outDir": "dist/",
+    "rootDir": "src/"
+  }
 }
