@@ -33,6 +33,7 @@
     "@finance-widgets/core-ui": "^0.1.0",
     "@lit-labs/context": "^0.4.0",
     "@shoelace-style/shoelace": "^2.7.0",
+    "d3": "^7.8.5",
     "d3fc": "^15.2.6",
     "lit": "^2.8.0"
   }

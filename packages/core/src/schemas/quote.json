@@ -21,10 +21,6 @@
     "change": {
       "description": "Price change from previous",
       "type": "number"
-    },
-    "changePercent": {
-      "description": "Price change from previous",
-      "type": "number"
     }
   },
   "additionalProperties": false,

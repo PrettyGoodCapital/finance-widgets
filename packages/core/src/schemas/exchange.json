@@ -1,0 +1,16 @@
+{
+  "title": "ExchangeData",
+  "type": "object",
+  "properties": {
+    "code": {
+      "description": "Code or identifier",
+      "type": "string"
+    },
+    "name": {
+      "description": "Name of asset",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": ["code"]
+}

@@ -4,7 +4,7 @@ import { ContextConsumer } from "@lit-labs/context";
 import {
   createIfNotDefined,
   QuoteMiniData,
-  providerContext,
+  PortfolioProviderContext,
 } from "@finance-widgets/core";
 
 import { QuoteMini } from "./quote-mini";
@@ -19,7 +19,7 @@ export class TickerTape extends WidgetBase(LitElement) {
   data = [];
 
   provider = new ContextConsumer(this, {
-    context: providerContext,
+    context: PortfolioProviderContext,
     subscribe: true,
   });
 

@@ -1,5 +1,6 @@
 import "@finance-widgets/core";
 import "@finance-widgets/core-ui";
+import "@finance-widgets/core-charts";
 import "@finance-widgets/provider";
 import "@finance-widgets/utilities";
 import "./index.css";

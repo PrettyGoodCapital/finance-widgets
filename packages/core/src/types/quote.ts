@@ -26,8 +26,4 @@ export interface QuoteData {
    * Price change from previous
    */
   change: number;
-  /**
-   * Price change from previous
-   */
-  changePercent?: number;
 }

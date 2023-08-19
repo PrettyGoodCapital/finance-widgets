@@ -1,0 +1,117 @@
+<div class="page-content">
+  <h1>Spark</h1>
+
+  <sl-alert open>
+    <sl-icon slot="icon" name="info-circle"></sl-icon>
+    This library is in pre-alpha stage and is not yet suitable for production usage.
+  </sl-alert>
+
+  <fw-utils-codeusage code="<fw-spark data='[]'></fw-spark>">
+    <div class="description" slot="description">
+      <div>
+        <p>
+          A single series line chart.
+        </p>
+      </div>
+      <div>
+        <h4 class="bold mt10">Types</h4>
+        <ul>
+          <li>
+            <div class="attributes">
+              <span class="code">
+                ChartMiniData
+              </span>
+            </div>
+            <ul>
+              <li>
+                <div class="attributes">
+                  <span class="bold">
+                    ticker
+                  </span>
+                  <code>
+                    string
+                  </code>
+                </div>
+              </li>
+              <li>
+                <div class="attributes">
+                  <span class="bold">
+                    price
+                  </span>
+                  <code>
+                    number[]
+                  </code>
+                </div>
+              </li>
+              <li>
+                <div class="attributes">
+                  <span class="bold">
+                    index
+                  </span>
+                  <code>
+                    number[]
+                  </code>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4 class="bold mt10">Properties</h4>
+        <ul>
+          <li>
+            <div class="attributes">
+              <span class="bold">
+                data
+              </span>
+              <code>
+                ChartMiniData
+              </code>
+              <span>
+                The data.
+              </span>
+            </div>
+          </li>
+
+          <h4 class="bold mt10">Methods</h4>
+        <ul>
+          <li>
+            <div class="attributes">
+              <span class="code">
+                updateData(nextIndex, nextPrice)
+              </span>
+            </div>
+            <ul>
+              <li>
+                <div class="attributes">
+                  <span class="bold">
+                    nextIndex
+                  </span>
+                  <code>
+                    number
+                  </code>
+                </div>
+              </li>
+              <li>
+                <div class="attributes">
+                  <span class="bold">
+                    nextPrice
+                  </span>
+                  <code>
+                    number
+                  </code>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div slot="example">
+      <p>Here shown inside a <span class="code">&lt;sl-card class="card-basic"&gt;</pre></span></p>
+      <sl-card class="card-basic">
+        <fw-spark data='{"ticker": "ABC.N", "price": [0, 1, 2, 3, 2, 1, 2, 3, 4], "index": [0, 1, 2, 3, 4, 5, 6, 7, 8]}'></fw-quote-mini>
+      </sl-card>
+    </div>
+  </fw-utils-codeusage>
+</div>

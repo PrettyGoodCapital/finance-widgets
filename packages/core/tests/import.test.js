@@ -1,7 +1,10 @@
 import {
   register_global_styles,
   createIfNotDefined,
-  providerContext,
+  SingleProviderContext,
+  SingleTargetProviderContext,
+  PortfolioProviderContext,
+  PortfolioTargetProviderContext,
 } from "../src";
 
 describe("Core", () => {
@@ -11,7 +14,16 @@ describe("Core", () => {
   test("Existence - createIfNotDefined", async () => {
     expect(createIfNotDefined).toBeDefined();
   });
-  test("Existence - providerContext", async () => {
-    expect(providerContext).toBeDefined();
+  test("Existence - SingleProviderContext", async () => {
+    expect(SingleProviderContext).toBeDefined();
+  });
+  test("Existence - SingleTargetProviderContext", async () => {
+    expect(SingleTargetProviderContext).toBeDefined();
+  });
+  test("Existence - PortfolioProviderContext", async () => {
+    expect(PortfolioProviderContext).toBeDefined();
+  });
+  test("Existence - PortfolioTargetProviderContext", async () => {
+    expect(PortfolioTargetProviderContext).toBeDefined();
   });
 });

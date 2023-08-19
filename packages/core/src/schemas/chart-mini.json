@@ -1,0 +1,26 @@
+{
+  "title": "ChartMiniData",
+  "type": "object",
+  "properties": {
+    "ticker": {
+      "description": "Ticker or identifier",
+      "type": "string"
+    },
+    "price": {
+      "description": "Array of prices",
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "index": {
+      "description": "Array of indexes for prices (most likely timestamps)",
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": ["ticker", "price", "index"]
+}

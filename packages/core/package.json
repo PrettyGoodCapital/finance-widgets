@@ -29,8 +29,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {},
-  "devDependencies": {
-    "json-schema-to-typescript": "^13.0.2"
-  }
+  "dependencies": {}
 }
