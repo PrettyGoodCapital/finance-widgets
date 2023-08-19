@@ -2,6 +2,7 @@ import { html, LitElement } from "lit";
 import { ContextProvider } from "@lit-labs/context";
 import {
   createIfNotDefined,
+  ChartMiniData,
   QuoteData,
   QuoteMiniData,
   ExchangeData,
@@ -12,13 +13,8 @@ import {
   SingleProviderContext,
   PortfolioProviderContext,
 } from "@finance-widgets/core";
-import {
-  WidgetBase,
-  baseStyle,
-  Quote,
-  QuoteMini,
-  TickerTape,
-} from "@finance-widgets/core-ui";
+import { WidgetBase, baseStyle, Quote, QuoteMini, TickerTape } from "@finance-widgets/core-ui";
+import { Spark, randomSeries } from "@finance-widgets/core-charts";
 import { fakerEN_US } from "@faker-js/faker";
 
 function choose(choices) {
@@ -30,6 +26,7 @@ export class RandomProvider implements SingleProvider, PortfolioProvider {
   protected _quotes: Array<Quote>;
   protected _quoteminis: Array<QuoteMini>;
   protected _tickertapes: Array<TickerTape>;
+  protected _sparks: Array<Spark>;
 
   protected _exchanges: Map<string, ExchangeData>;
   protected _stocks: Map<string, QuoteData>;
@@ -39,6 +36,7 @@ export class RandomProvider implements SingleProvider, PortfolioProvider {
     this._quotes = new Array<Quote>();
     this._quoteminis = new Array<QuoteMini>();
     this._tickertapes = new Array<TickerTape>();
+    this._sparks = new Array<Spark>();
 
     this.seed.bind(this);
     this.registerTickerTape.bind(this);
@@ -112,6 +110,9 @@ export class RandomProvider implements SingleProvider, PortfolioProvider {
       const { price, change } = this._stocks.get(this._ticker);
       q.updateData(price, change);
     });
+    this._sparks.forEach((s) => {
+      s.updateData();
+    });
   }
 
   providesSingle(): ProvidesSingle[] {
@@ -138,6 +139,15 @@ export class RandomProvider implements SingleProvider, PortfolioProvider {
   getQuoteMini(): QuoteMiniData {
     // return array of 25 elements that tick every 1s
     return this._stocks.get(this._ticker);
+  }
+
+  registerSpark(sparkElement: Spark) {
+    this._sparks.push(sparkElement);
+  }
+
+  getSpark(): ChartMiniData {
+    // return some random data
+    return { ticker: this._ticker, price: randomSeries(100), index: Array.from(Array(100).keys()) };
   }
 
   registerTickerTape(tickerTapeElement: TickerTape) {

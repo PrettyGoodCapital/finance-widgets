@@ -1,6 +1,7 @@
 import { html, css, unsafeCSS, LitElement } from "lit";
 import { property, state } from "lit/decorators.js";
-import { createIfNotDefined, QuoteMiniData } from "@finance-widgets/core";
+import { ContextConsumer } from "@lit-labs/context";
+import { createIfNotDefined, QuoteMiniData, SingleProviderContext } from "@finance-widgets/core";
 import { WidgetBase, baseStyle } from "../base";
 
 import quoteminiStyle from "./quote-mini.css";
@@ -10,6 +11,11 @@ export class QuoteMini extends WidgetBase(LitElement) {
 
   @property({ type: Object })
   data: QuoteMiniData = null;
+
+  provider = new ContextConsumer(this, {
+    context: SingleProviderContext,
+    subscribe: true,
+  });
 
   @state()
   protected _ticker: string = "";
@@ -45,30 +51,24 @@ export class QuoteMini extends WidgetBase(LitElement) {
   }
 
   render() {
-    if (this.data) {
-      const { ticker, price, change } = this.data;
-      this._ticker = ticker;
-      this._price = price;
-      this._change = change;
+    let data = this.data;
+    if (this.provider.value) {
+      this.provider.value.registerQuote(this);
+      data = this.provider.value.getQuote();
     }
+
+    const { ticker, price, change } = data;
+    this._ticker = ticker;
+    this._price = price;
+    this._change = change;
 
     const contents = html!`
       <div key=${this._ticker} class="row">
         <span class="ticker bold">${this._ticker}</span>
         <span class="price">${this._price.toFixed(2)}</span>
         <span class="icon row ${
-          this._change === 0
-            ? "trending-flat"
-            : this._change > 0
-            ? "trending-up"
-            : "trending-down"
-        } ${
-          this._change === 0
-            ? "indicator-neutral"
-            : this._change > 0
-            ? "indicator-positive"
-            : "indicator-negative"
-        }
+          this._change === 0 ? "trending-flat" : this._change > 0 ? "trending-up" : "trending-down"
+        } ${this._change === 0 ? "indicator-neutral" : this._change > 0 ? "indicator-positive" : "indicator-negative"}
         "></span>
         <span class="change">${Math.abs(this._change).toFixed(2)}</span>
       </div>`;

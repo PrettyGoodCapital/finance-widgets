@@ -13,14 +13,17 @@
 
 .price {
   font-size: var(--sl-font-size-2x-large);
+  font-family: var(--sl-font-mono);
   margin-right: 5px;
 }
 
 .change {
   font-size: var(--sl-font-size-x-large);
+  font-family: var(--sl-font-mono);
   margin-right: 5px;
 }
 
 .changePercent {
   font-size: var(--sl-font-size-x-large);
+  font-family: var(--sl-font-mono);
 }

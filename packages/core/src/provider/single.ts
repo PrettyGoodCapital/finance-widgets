@@ -1,6 +1,6 @@
 import { createContext } from "@lit-labs/context";
 import { BaseProvider } from "./base";
-import { QuoteData, QuoteMiniData } from "../types";
+import { QuoteData, QuoteMiniData, ChartMiniData } from "../types";
 
 export enum ProvidesSingle {
   QuoteMini,
@@ -15,6 +15,10 @@ export interface SingleProvider extends BaseProvider {
   getQuote: () => QuoteData;
   registerQuoteMini: (quoteMiniElement: HTMLElement) => void;
   getQuoteMini: () => QuoteMiniData;
+
+  /* charts */
+  registerSpark: (sparkElement: HTMLElement) => void;
+  getSpark: () => ChartMiniData;
 }
 
 export interface SingleTargetProvider extends BaseProvider {
@@ -22,8 +26,5 @@ export interface SingleTargetProvider extends BaseProvider {
 }
 
 /* https://lit.dev/docs/data/context/ */
-export const SingleProviderContext =
-  createContext<SingleProvider>("singleprovider");
-export const SingleTargetProviderContext = createContext<SingleTargetProvider>(
-  "singletargetprovider",
-);
+export const SingleProviderContext = createContext<SingleProvider>("singleprovider");
+export const SingleTargetProviderContext = createContext<SingleTargetProvider>("singletargetprovider");

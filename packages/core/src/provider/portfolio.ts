@@ -19,7 +19,5 @@ export interface PortfolioTargetProvider extends BaseProvider {
 }
 
 /* https://lit.dev/docs/data/context/ */
-export const PortfolioProviderContext =
-  createContext<PortfolioProvider>("portfolioprovider");
-export const PortfolioTargetProviderContext =
-  createContext<PortfolioTargetProvider>("portfoliotargetprovider");
+export const PortfolioProviderContext = createContext<PortfolioProvider>("portfolioprovider");
+export const PortfolioTargetProviderContext = createContext<PortfolioTargetProvider>("portfoliotargetprovider");

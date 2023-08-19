@@ -13,9 +13,7 @@ export const baseStyle = css`
   ${unsafeCSS(baseStyleRaw)}
 `;
 
-export const WidgetBase = <T extends Constructor<LitElement>>(
-  superClass: T,
-) => {
+export const WidgetBase = <T extends Constructor<LitElement>>(superClass: T) => {
   class WidgetBaseClass extends superClass {
     // static styles = [baseStyle];
   }

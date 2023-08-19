@@ -10,10 +10,7 @@ import codeusageStyle from "./code-usage.css";
 
 export function highlightCode(code, lang) {
   // https://highlightjs.readthedocs.io/en/latest/api.html#highlightauto-value-languagesubset
-  const highlightedCode = hljs.highlightAuto(
-    code,
-    lang ? [lang] : undefined,
-  ).value;
+  const highlightedCode = hljs.highlightAuto(code, lang ? [lang] : undefined).value;
   return highlightedCode;
 }
 
@@ -21,28 +18,11 @@ export function guidGenerator() {
   const S4 = function () {
     return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
   };
-  return (
-    S4() +
-    S4() +
-    "-" +
-    S4() +
-    "-" +
-    S4() +
-    "-" +
-    S4() +
-    "-" +
-    S4() +
-    S4() +
-    S4()
-  );
+  return S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4();
 }
 
 export class CodeBlock extends LitElement {
-  static styles = [
-    baseStyle,
-    css!`${unsafeCSS(hljsDefaultCss)}`,
-    css!`${unsafeCSS(codeusageStyle)}`,
-  ];
+  static styles = [baseStyle, css!`${unsafeCSS(hljsDefaultCss)}`, css!`${unsafeCSS(codeusageStyle)}`];
 
   @property({ type: String })
   language = "html";
@@ -91,10 +71,7 @@ export class CodeUsage extends WidgetBase(LitElement) {
         </div>
         <slot name="code-block">
           <h4 class="mb10">Usage</h4>
-          <fw-utils-codeblock
-            language="${this.language}"
-            code="${this.code}"
-          ></fw-utils-codeblock>
+          <fw-utils-codeblock language="${this.language}" code="${this.code}"></fw-utils-codeblock>
         </slot>
         <div slot="footer">
           <h4 class="mb10">Example</h4>

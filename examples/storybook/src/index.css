@@ -111,12 +111,19 @@ div.nav {
 .page-container {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .page {
-    display: none;
     height: 100%;
     width: 100%;
+}
+
+.page-hidden {
+    visibility: hidden;
+    position: absolute;
+    top: -100000px;
+    left: -100000px;
 }
 
 .page-content {

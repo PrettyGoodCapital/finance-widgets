@@ -7,14 +7,10 @@ import build from "@finance-widgets/tools/build.js";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /* types */
-const types = fs
-  .readdirSync("./src/schemas")
-  .map((fn) => fn.replace(".json", ""));
+const types = fs.readdirSync("./src/schemas").map((fn) => fn.replace(".json", ""));
 let output = "";
 types.forEach((src) => {
-  compileFromFile(`src/schemas/${src}.json`).then((ts) =>
-    fs.writeFileSync(`src/types/${src}.ts`, ts),
-  );
+  compileFromFile(`src/schemas/${src}.json`).then((ts) => fs.writeFileSync(`src/types/${src}.ts`, ts));
   output += `export * from "./${src}";\n`;
 });
 fs.writeFileSync("src/types/index.ts", output);

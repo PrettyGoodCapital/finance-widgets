@@ -1,8 +1,16 @@
 :host {
+  --chart-height: 100px;
+  --chart-width: 100px;
+  display: flex;
 }
 
 .chart {
+  height: var(--chart-height);
+  width: var(--chart-width);
   display: flex;
-  min-height: 100px;
-  min-width: 100px;
+}
+
+.chart > d3fc-canvas {
+  height: var(--chart-height);
+  width: var(--chart-width);
 }
