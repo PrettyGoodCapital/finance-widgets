@@ -49,6 +49,9 @@ jobs:
     - name: Build 
       run: yarn build
 
+    - name: Build Docs
+      run: yarn docs
+
     - name: Lint
       run: yarn lint
 
@@ -73,3 +76,11 @@ jobs:
     - name: Upload coverage
       uses: codecov/codecov-action@v3
 
+    - name: Deploy Documentatinoj
+      uses: peaceiris/actions-gh-pages@v3
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+      with:
+        publish_branch: gh-pages
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: docs/
+        force_orphan: true
