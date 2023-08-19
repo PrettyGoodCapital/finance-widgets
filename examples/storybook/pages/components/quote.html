@@ -1,0 +1,209 @@
+<div class="page-content">
+  <h1>Quote</h1>
+
+  <sl-alert open>
+    <sl-icon slot="icon" name="info-circle"></sl-icon>
+    This library is in pre-alpha stage and is not yet suitable for production usage.
+  </sl-alert>
+
+  <fw-utils-codeusage code="<fw-quote data='{&quot;ticker&quot;: &quot;AAPL&quot;, &quot;name&quot;: &quot;Apple Inc&quot;, &quot;market&quot;: &quot;NASDAQ/NGS (Global Select Market)&quot;, &quot;price&quot;: 146.39, &quot;change&quot;: -2.09, &quot;changePercent&quot;: -1.41}'></fw-quote>">
+    <div class="description" slot="description">
+      <div>
+        <p>
+          A single asset quote widget.
+        </p>
+      </div>
+      <div>
+        <h4 class="bold mt10">Kind</h4>
+        <span class="code">
+          Per-ticker component
+        </span>
+      </div>
+      <div>
+        <h4 class="bold mt10">Types</h4>
+        <ul>
+          <li>
+            <div class="attributes">
+              <span class="code">
+                QuoteData
+              </span>
+            </div>
+            <ul>
+              <li>
+                <div class="attributes">
+                  <span class="bold">
+                    ticker
+                  </span>
+                  <code>
+                    string
+                  </code>
+                </div>
+              </li>
+              <li>
+                <div class="attributes">
+                  <span class="bold">
+                    name
+                  </span>
+                  <code>
+                    string
+                  </code>
+                </div>
+              </li>
+              <li>
+                <div class="attributes">
+                  <span class="bold">
+                    market
+                  </span>
+                  <code>
+                    string
+                  </code>
+                </div>
+              </li>
+              <li>
+                <div class="attributes">
+                  <span class="bold">
+                    price
+                  </span>
+                  <code>
+                    number
+                  </code>
+                </div>
+              </li>
+              <li>
+                <div class="attributes">
+                  <span class="bold">
+                    change
+                  </span>
+                  <code>
+                    number
+                  </code>
+                </div>
+              </li>
+              <li>
+                <div class="attributes">
+                  <span class="bold">
+                    changePercent
+                  </span>
+                  <code>
+                    number
+                  </code>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4 class="bold mt10">Properties</h4>
+        <ul>
+          <li>
+            <div class="attributes">
+              <span class="bold">
+                data
+              </span>
+              <code>
+                QuoteData
+              </code>
+              <span>
+                The data.
+              </span>
+            </div>
+          </li>
+
+          <li>
+            <div class="attributes">
+              <span class="bold">
+                color_positive
+              </span>
+              <code>
+                String
+              </code>
+              <span>
+                Controls the color of the change text when positive, defaults to <code>"var(--sl-color-success-500)"</code>
+              </span>
+            </div>
+          </li>
+
+          <li>
+            <div class="attributes">
+              <span class="bold">
+                color_negative
+              </span>
+              <code>
+                String
+              </code>
+              <span>
+                Controls the color of the change text when negative, defaults to <code>"var(--sl-color-danger-500)"</code>
+              </span>
+            </div>
+          </li>
+
+          <li>
+            <div class="attributes">
+              <span class="bold">
+                color_neutral
+              </span>
+              <code>
+                String
+              </code>
+              <span>
+                Controls the color of the change text when flat, defaults to <code>"var(--sl-color-neutral-500)"</code>
+              </span>
+            </div>
+          </li>
+        </ul>
+
+        <h4 class="bold mt10">Methods</h4>
+        <ul>
+          <li>
+            <div class="attributes">
+              <span class="code">
+                updateData(newPrice, newChange, newChangePercent)
+              </span>
+            </div>
+            <ul>
+              <li>
+                <div class="attributes">
+                  <span class="bold">
+                    newPrice
+                  </span>
+                  <code>
+                    number
+                  </code>
+                </div>
+              </li>
+              <li>
+                <div class="attributes">
+                  <span class="bold">
+                    newChange
+                  </span>
+                  <code>
+                    number
+                  </code>
+                </div>
+              </li>
+              <li>
+                <div class="attributes">
+                  <span class="bold">
+                    newChangePercent
+                  </span>
+                  <code>
+                    number
+                  </code>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div slot="example" style="display: flex; flex-direction: column; align-items: flex-start;">
+      <p style="flex: 1;">Here shown inside a <span class="code">&lt;sl-card class="card-basic"&gt;</pre></span></p>
+      <sl-card class="card-basic mt10" style="min-width: 360px;">
+        <fw-quote data='{"ticker": "AAPL", "name": "Apple Inc", "market": "NASDAQ/NGS (Global Select Market)", "price": 146.39, "change": -2.09, "changePercent": -1.41}'></fw-quote>
+      </sl-card>
+      <sl-card class="card-basic mt10" style="min-width: 360px;">
+        <fw-quote data='{"ticker": "^DJI", "name": "Dow Jones Industrial Average", "market": "", "price": 34500.66, "change": 25.83, "changePercent": 0.07}'></fw-quote>
+      </sl-card>
+    </div>
+  </fw-utils-codeusage>
+</div>

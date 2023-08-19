@@ -34,20 +34,8 @@
 
           <sl-divider></sl-divider>
 
-          <a href="#global">
-            <h4>Global</h4>
-          </a>
-
-          <ul class="component-list">
-            <li>
-              <a href="#tickertape">Tickertape</a>
-            </li>
-          </ul>
-
-          <sl-divider></sl-divider>
-
-          <a href="#ticker">
-            <h4>Ticker</h4>
+          <a href="#components">
+            <h4>Components</h4>
           </a>
 
           <ul class="component-list">
@@ -56,6 +44,33 @@
             </li>
             <li>
               <a href="#quote">Quote</a>
+            </li>
+            <li>
+              <a href="#tickertape">Tickertape</a>
+            </li>
+          </ul>
+
+          <sl-divider></sl-divider>
+
+          <a href="#charts">
+            <h4>Charts</h4>
+          </a>
+
+          <ul class="component-list">
+            <li>
+              <a href="#spark">Spark</a>
+            </li>
+          </ul>
+
+          <sl-divider></sl-divider>
+
+          <a href="#orderentry">
+            <h4>Order Entry</h4>
+          </a>
+
+          <ul class="component-list">
+            <li>
+              <a href="#test">Test</a>
             </li>
           </ul>
 
@@ -97,12 +112,16 @@
             <sl-include src="pages/overview.html"></sl-include>
           </div>
 
-          <div id="global" class="page">
-            <sl-include src="pages/global.html"></sl-include>
+          <div id="components" class="page">
+            <sl-include src="pages/components.html"></sl-include>
           </div>
 
-          <div id="ticker" class="page">
-            <sl-include src="pages/ticker.html"></sl-include>
+          <div id="charts" class="page">
+            <sl-include src="pages/charts.html"></sl-include>
+          </div>
+
+          <div id="orderentry" class="page">
+            <sl-include src="pages/orderentry.html"></sl-include>
           </div>
 
           <div id="providers" class="page">
@@ -113,17 +132,25 @@
             <sl-include src="pages/utilities.html"></sl-include>
           </div>
 
-          <!-- Child Pages / Global -->
-          <div id="tickertape" class="page">
-            <sl-include src="pages/global/tickertape.html"></sl-include>
-          </div>
-
-          <!-- Child Pages / Ticker -->
+          <!-- Child Pages / Components -->
           <div id="quotemini" class="page">
-            <sl-include src="pages/ticker/quote-mini.html"></sl-include>
+            <sl-include src="pages/components/quote-mini.html"></sl-include>
           </div>
           <div id="quote" class="page">
-            <sl-include src="pages/ticker/quote.html"></sl-include>
+            <sl-include src="pages/components/quote.html"></sl-include>
+          </div>
+          <div id="tickertape" class="page">
+            <sl-include src="pages/components/tickertape.html"></sl-include>
+          </div>
+
+          <!-- Child Pages / Charts -->
+          <div id="spark" class="page">
+            <sl-include src="pages/charts/spark.html"></sl-include>
+          </div>
+
+          <!-- Child Pages / Order Entry -->
+          <div id="test" class="page">
+            <sl-include src="pages/orderentry/test.html"></sl-include>
           </div>
 
           <!-- Child Pages / Provider -->
