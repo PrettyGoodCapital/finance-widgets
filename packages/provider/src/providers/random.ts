@@ -1,14 +1,24 @@
 import { html, LitElement } from "lit";
 import { ContextProvider } from "@lit-labs/context";
 import {
-  QuoteMiniData,
-  BaseProvider,
   createIfNotDefined,
-  providerContext,
+  QuoteData,
+  QuoteMiniData,
+  ExchangeData,
+  SingleProvider,
+  ProvidesSingle,
+  PortfolioProvider,
+  ProvidesPortfolio,
+  SingleProviderContext,
+  PortfolioProviderContext,
 } from "@finance-widgets/core";
-import { WidgetBase, baseStyle } from "@finance-widgets/core-ui";
-
-import { TickerTape } from "@finance-widgets/core-ui";
+import {
+  WidgetBase,
+  baseStyle,
+  Quote,
+  QuoteMini,
+  TickerTape,
+} from "@finance-widgets/core-ui";
 import { fakerEN_US } from "@faker-js/faker";
 
 function choose(choices) {
@@ -16,18 +26,32 @@ function choose(choices) {
   return choices[index];
 }
 
-type ExchangeData = {
-  code: string;
-};
-
-export class RandomProvider implements BaseProvider {
+export class RandomProvider implements SingleProvider, PortfolioProvider {
+  protected _quotes: Array<Quote>;
+  protected _quoteminis: Array<QuoteMini>;
   protected _tickertapes: Array<TickerTape>;
+
   protected _exchanges: Map<string, ExchangeData>;
-  protected _stocks: Map<string, QuoteMiniData>;
+  protected _stocks: Map<string, QuoteData>;
+  protected _ticker: string;
 
   constructor() {
+    this._quotes = new Array<Quote>();
+    this._quoteminis = new Array<QuoteMini>();
     this._tickertapes = new Array<TickerTape>();
 
+    this.seed.bind(this);
+    this.registerTickerTape.bind(this);
+    this.getTickerTape.bind(this);
+    this._gendata.bind(this);
+    this.refresh.bind(this);
+
+    this.seed().then(() => {
+      setInterval(() => this.refresh(), 1000);
+    });
+  }
+
+  async seed() {
     // seed exchanges
     this._exchanges = new Map<string, ExchangeData>();
     [...Array(3)].map(() => {
@@ -41,7 +65,7 @@ export class RandomProvider implements BaseProvider {
     });
 
     // seed stocks
-    this._stocks = new Map<string, QuoteMiniData>();
+    this._stocks = new Map<string, QuoteData>();
 
     [...Array(25)].map(() => {
       const name = `${fakerEN_US.string.alpha({
@@ -50,17 +74,13 @@ export class RandomProvider implements BaseProvider {
       })}.${choose([...this._exchanges.keys()])}`;
       this._stocks.set(name, {
         ticker: name,
+        name,
         price: fakerEN_US.number.float({ min: 1, max: 90, precision: 0.01 }),
         change: 0.0,
       });
     });
 
-    this.registerTickerTape.bind(this);
-    this.getTickerTape.bind(this);
-    this._gendata.bind(this);
-    this.refresh.bind(this);
-
-    setInterval(() => this.refresh(), 1000);
+    this._ticker = [...this._stocks.keys()][0];
   }
 
   _gendata() {
@@ -84,6 +104,40 @@ export class RandomProvider implements BaseProvider {
         tt.updateData(ticker, price, change);
       }
     });
+    this._quotes.forEach((q) => {
+      const { price, change } = this._stocks.get(this._ticker);
+      q.updateData(price, change);
+    });
+    this._quoteminis.forEach((q) => {
+      const { price, change } = this._stocks.get(this._ticker);
+      q.updateData(price, change);
+    });
+  }
+
+  providesSingle(): ProvidesSingle[] {
+    return [ProvidesSingle.Quote, ProvidesSingle.QuoteMini];
+  }
+
+  providesPortfolio(): ProvidesPortfolio[] {
+    return [ProvidesPortfolio.TickerTape];
+  }
+
+  registerQuote(quoteElement: Quote) {
+    this._quotes.push(quoteElement);
+  }
+
+  getQuote(): QuoteData {
+    // return array of 25 elements that tick every 1s
+    return this._stocks.get(this._ticker);
+  }
+
+  registerQuoteMini(quoteMiniElement: QuoteMini) {
+    this._quoteminis.push(quoteMiniElement);
+  }
+
+  getQuoteMini(): QuoteMiniData {
+    // return array of 25 elements that tick every 1s
+    return this._stocks.get(this._ticker);
   }
 
   registerTickerTape(tickerTapeElement: TickerTape) {
@@ -100,9 +154,16 @@ export class RandomProvider implements BaseProvider {
 export class RandomProviderContext extends WidgetBase(LitElement) {
   static styles = [baseStyle];
 
-  provider = new ContextProvider(this, {
-    context: providerContext,
-    initialValue: new RandomProvider(),
+  provider = new RandomProvider();
+
+  singleprovider = new ContextProvider(this, {
+    context: SingleProviderContext,
+    initialValue: this.provider,
+  });
+
+  portfolioprovider = new ContextProvider(this, {
+    context: PortfolioProviderContext,
+    initialValue: this.provider,
   });
 
   render() {
