@@ -1,11 +1,7 @@
 import { html, css, unsafeCSS, LitElement } from "lit";
 import { property } from "lit/decorators.js";
 import { ContextConsumer } from "@lit-labs/context";
-import {
-  createIfNotDefined,
-  QuoteMiniData,
-  PortfolioProviderContext,
-} from "@finance-widgets/core";
+import { createIfNotDefined, QuoteMiniData, PortfolioProviderContext } from "@finance-widgets/core";
 
 import { QuoteMini } from "./quote-mini";
 import { WidgetBase, baseStyle } from "../base";
@@ -36,9 +32,7 @@ export class TickerTape extends WidgetBase(LitElement) {
   color_neutral = "var(--sl-color-neutral-500)";
 
   updateData(ticker: string, newPrice: number, newChange: number) {
-    const elements = this.renderRoot.querySelectorAll(
-      `fw-quote-mini[key="${ticker}"]`,
-    );
+    const elements = this.renderRoot.querySelectorAll(`fw-quote-mini[key="${ticker}"]`);
     elements.forEach((elem: QuoteMini) => elem.updateData(newPrice, newChange));
   }
 
@@ -54,11 +48,9 @@ export class TickerTape extends WidgetBase(LitElement) {
 
     const contents = data.map((datum: QuoteMiniData) => {
       const { ticker } = datum;
-      return html!`<fw-quote-mini key=${ticker} data=${JSON.stringify(
-        datum,
-      )} color_positive="${this.color_positive}" color_neutral="${
-        this.color_neutral
-      }" color_negative="${this.color_negative}"/></fw-quote-mini>`;
+      return html!`<fw-quote-mini key=${ticker} data=${JSON.stringify(datum)} color_positive="${
+        this.color_positive
+      }" color_neutral="${this.color_neutral}" color_negative="${this.color_negative}"/></fw-quote-mini>`;
     });
     return html`
       <style>

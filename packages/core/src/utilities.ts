@@ -19,3 +19,10 @@ export const createIfNotDefined = (name, element) => {
     console.log(`Registering custom element ${name}`);
   }
 };
+
+export function formatNumber(num: number, decimals: number = 2): string {
+  return `${num >= 0 ? "+" : ""}${num.toLocaleString("en-US", {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: decimals,
+  })}`;
+}

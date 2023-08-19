@@ -96,6 +96,21 @@
           <li>
             <div class="attributes">
               <span class="bold">
+                orient
+              </span>
+              <code>
+                String
+              </code>
+              <span>
+                Controls whether the change is displayed below ("vertical") or next-to ("horizontal") the price.
+                Default is "horizontal".
+              </span>
+            </div>
+          </li>
+
+          <li>
+            <div class="attributes">
+              <span class="bold">
                 color_positive
               </span>
               <code>
@@ -176,7 +191,7 @@
         <fw-quote data='{"ticker": "AAPL", "name": "Apple Inc", "market": "NASDAQ/NGS (Global Select Market)", "price": 146.39, "change": -2.09}'></fw-quote>
       </sl-card>
       <sl-card class="card-basic mt10" style="min-width: 360px;">
-        <fw-quote data='{"ticker": "^DJI", "name": "Dow Jones Industrial Average", "market": "", "price": 34500.66, "change": 25.83}'></fw-quote>
+        <fw-quote data='{"ticker": "^DJI", "name": "Dow Jones", "market": "", "price": 34500.66, "change": 25.83}' orient="vertical"></fw-quote>
       </sl-card>
     </div>
   </fw-utils-codeusage>

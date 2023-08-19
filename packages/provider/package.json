@@ -22,8 +22,8 @@
     "watch": "npm-run-all -p watch:*",
     "clean": "rimraf dist lib coverage junit.xml",
     "fix": "yarn lint --fix",
-    "lint": "eslint --ext js --ext ts src/ build.js",
-    "test": "NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --config .jestrc.js --forceExit --coverage"
+    "lint": "eslint --ext js --ext ts --ext json src/ build.js jest.config.js tsconfig.json package.json",
+    "test": "NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --config jest.config.js --forceExit --coverage"
   },
   "publishConfig": {
     "access": "public"

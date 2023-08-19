@@ -1,11 +1,7 @@
 import { html, css, unsafeCSS, LitElement } from "lit";
 import { property, state } from "lit/decorators.js";
 import { ContextConsumer } from "@lit-labs/context";
-import {
-  createIfNotDefined,
-  QuoteData,
-  SingleProviderContext,
-} from "@finance-widgets/core";
+import { createIfNotDefined, formatNumber, QuoteData, SingleProviderContext } from "@finance-widgets/core";
 import { WidgetBase, baseStyle } from "../base";
 
 import quoteStyle from "./quote.css";
@@ -37,6 +33,9 @@ export class Quote extends WidgetBase(LitElement) {
   protected _change: number = 0.0;
 
   @property({ type: String })
+  orient: "horizontal" | "vertical" = "horizontal";
+
+  @property({ type: String })
   color_positive = "var(--sl-color-success-500)";
 
   @property({ type: String })
@@ -63,12 +62,10 @@ export class Quote extends WidgetBase(LitElement) {
   }
 
   render() {
-    let data;
+    let data = this.data;
     if (this.provider.value) {
       this.provider.value.registerQuote(this);
       data = this.provider.value.getQuote();
-    } else if (this.data) {
-      data = this.data;
     }
 
     const { ticker, name, market, price, change } = data;
@@ -79,6 +76,28 @@ export class Quote extends WidgetBase(LitElement) {
     this._change = change || 0.0;
     const _changePercent = change / (price - change);
 
+    const changeHtml = html!`
+    <div class="row ${this._change === 0 ? "flat" : this._change > 0 ? "up" : "down"}">
+      <span class="change">${formatNumber(this._change)}</span>
+      <span class="changePercent">(${formatNumber(_changePercent)}%)</span>
+    </div>`;
+
+    const formattedprice = this._price.toLocaleString("en-US", { minimumFractionDigits: 1, maximumFractionDigits: 2 });
+
+    let priceRow;
+    if (this.orient === "horizontal") {
+      priceRow = html!`<div class="row"><span class="price">${formattedprice}</span>${changeHtml}</div>`;
+    } else {
+      priceRow = html!`<div class="row"><span class="price">${formattedprice}</span></div>`;
+    }
+
+    let changeRow;
+    if (this.orient === "horizontal") {
+      changeRow = html!``;
+    } else {
+      changeRow = html!`<div class="row">${changeHtml}</div>`;
+    }
+
     const contents = html!`
       <div key=${this._ticker} class="col">
         <div class="row">
@@ -88,15 +107,8 @@ export class Quote extends WidgetBase(LitElement) {
         <div class="row">
           <span class="market mr5">${this._market}</span>
         </div>
-        <div class="row">
-          <span class="price">${this._price.toFixed(2)}</span>
-          <div class="row ${
-            this._change === 0 ? "flat" : this._change > 0 ? "up" : "down"
-          }">
-            <span class="change">${this._change?.toFixed(2)}</span>
-            <span class="changePercent">(${_changePercent.toFixed(2)}%)</span>
-          </div>
-        </div>
+        ${priceRow}
+        ${changeRow}
       </div>`;
     return html`
       <style>
