@@ -1,7 +1,7 @@
 import { html, LitElement } from "lit";
 import { provide, createContext } from "@lit-labs/context";
 import { createIfNotDefined } from "@finance-widgets/core";
-import { WidgetBase, baseStyle } from "../base";
+import { WidgetBase, baseStyle } from "../components/base";
 
 /* https://lit.dev/docs/data/context/ */
 export const tickerContext = createContext<string>("ticker");

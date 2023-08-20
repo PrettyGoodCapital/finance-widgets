@@ -27,6 +27,7 @@ module.exports = {
     camelcase: "off",
     "func-names": "off",
     eqeqeq: "error",
+    "no-console": "warn",
     "no-underscore-dangle": "off",
     "lines-between-class-members": "off",
     "import/prefer-default-export": "off",

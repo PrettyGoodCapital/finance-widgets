@@ -1,13 +1,13 @@
 import { html, LitElement } from "lit";
 import { ContextProvider } from "@lit-labs/context";
+import { createIfNotDefined } from "@finance-widgets/core";
 import {
-  createIfNotDefined,
   SingleProviderContext,
   SingleTargetProviderContext,
   PortfolioProviderContext,
   PortfolioTargetProviderContext,
-} from "@finance-widgets/core";
-import { WidgetBase, baseStyle } from "../base";
+} from "../provider";
+import { WidgetBase, baseStyle } from "../components";
 
 export class ProviderContext extends WidgetBase(LitElement) {
   static styles = [baseStyle];

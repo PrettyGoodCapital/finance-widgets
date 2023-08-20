@@ -1,0 +1,36 @@
+{
+  "name": "@finance-widgets/provider-perspective",
+  "version": "0.1.0",
+  "description": "Core finance widgets",
+  "repository": "git@github.com:prettygoodcapital/finance-widgets.git",
+  "author": "prettygoodcapital <prettygoodcapital@gmail.com>",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "browser": "dist/index.js",
+  "unpkg": "dist/index.js",
+  "jsdelivr": "dist/index.js",
+  "files": [
+    "dist/*"
+  ],
+  "scripts": {
+    "build:esbuild": "node build.js",
+    "build:tsc": "tsc",
+    "build": "npm-run-all -p build:*",
+    "watch:esbuild": "yarn build:esbuild --watch",
+    "watch": "npm-run-all -p watch:*",
+    "clean": "rimraf dist lib coverage junit.xml",
+    "fix": "yarn lint --fix",
+    "lint": "eslint --ext js --ext ts --ext json src/ build.js jest.config.js tsconfig.json package.json",
+    "test": "NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --config jest.config.js --forceExit --coverage"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@finance-widgets/core": "^0.1.0",
+    "@finance-widgets/core-ui": "^0.1.0",
+    "@finos/perspective": "^2.5.0"
+  }
+}

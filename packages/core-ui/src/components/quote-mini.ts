@@ -1,24 +1,15 @@
 import { html, css, unsafeCSS, LitElement } from "lit";
 import { property, state } from "lit/decorators.js";
-import { ContextConsumer } from "@lit-labs/context";
-import { createIfNotDefined, QuoteMiniData, SingleProviderContext } from "@finance-widgets/core";
-import { WidgetBase, baseStyle } from "../base";
+import { createIfNotDefined, QuoteMiniData } from "@finance-widgets/core";
+import { SingleProviderConsumer, baseStyle } from "./base";
 
 import quoteminiStyle from "./quote-mini.css";
 
-export class QuoteMini extends WidgetBase(LitElement) {
+export class QuoteMini extends SingleProviderConsumer(LitElement) {
   static styles = [baseStyle, css!`${unsafeCSS(quoteminiStyle)}`];
 
   @property({ type: Object })
   data: QuoteMiniData = null;
-
-  provider = new ContextConsumer(this, {
-    context: SingleProviderContext,
-    subscribe: true,
-  });
-
-  @state()
-  protected _ticker: string = "";
 
   @state()
   protected _price: number = null;
@@ -37,7 +28,7 @@ export class QuoteMini extends WidgetBase(LitElement) {
 
   protected _updateData() {
     this.data = {
-      ticker: this._ticker,
+      ticker: this.ticker,
       price: this._price,
       change: this._change,
     };
@@ -52,19 +43,24 @@ export class QuoteMini extends WidgetBase(LitElement) {
 
   render() {
     let data = this.data;
+
+    // get ticker from provider if provided
+    this.ticker = this.getTicker();
+
+    // get data from provider if provided
     if (this.provider.value) {
-      this.provider.value.registerQuote(this);
-      data = this.provider.value.getQuote();
+      this.provider.value.registerQuoteMini(this.ticker, this);
+      data = this.provider.value.getQuoteMini(this.ticker);
     }
 
-    const { ticker, price, change } = data;
-    this._ticker = ticker;
+    // format result
+    const { price, change } = data;
     this._price = price;
     this._change = change;
 
     const contents = html!`
-      <div key=${this._ticker} class="row">
-        <span class="ticker bold">${this._ticker}</span>
+      <div class="row">
+        <span class="ticker bold">${this.ticker}</span>
         <span class="price">${this._price.toFixed(2)}</span>
         <span class="icon row ${
           this._change === 0 ? "trending-flat" : this._change > 0 ? "trending-up" : "trending-down"

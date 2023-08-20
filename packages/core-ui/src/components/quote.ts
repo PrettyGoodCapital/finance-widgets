@@ -1,24 +1,15 @@
 import { html, css, unsafeCSS, LitElement } from "lit";
 import { property, state } from "lit/decorators.js";
-import { ContextConsumer } from "@lit-labs/context";
-import { createIfNotDefined, formatNumber, QuoteData, SingleProviderContext } from "@finance-widgets/core";
-import { WidgetBase, baseStyle } from "../base";
+import { createIfNotDefined, formatNumber, QuoteData } from "@finance-widgets/core";
+import { SingleProviderConsumer, baseStyle } from "./base";
 
 import quoteStyle from "./quote.css";
 
-export class Quote extends WidgetBase(LitElement) {
+export class Quote extends SingleProviderConsumer(LitElement) {
   static styles = [baseStyle, css!`${unsafeCSS(quoteStyle)}`];
 
   @property({ type: Object })
   data: QuoteData = null;
-
-  provider = new ContextConsumer(this, {
-    context: SingleProviderContext,
-    subscribe: true,
-  });
-
-  @state()
-  protected _ticker: string = "-";
 
   @state()
   protected _name: string = "--";
@@ -46,7 +37,7 @@ export class Quote extends WidgetBase(LitElement) {
 
   protected _updateData() {
     this.data = {
-      ticker: this._ticker || "-",
+      ticker: this.ticker || "-",
       name: this._name || "--",
       market: this._market,
       price: this._price || 0.0,
@@ -63,13 +54,18 @@ export class Quote extends WidgetBase(LitElement) {
 
   render() {
     let data = this.data;
+
+    // get ticker from provider if provided
+    this.ticker = this.getTicker();
+
+    // get data from provider if provided
     if (this.provider.value) {
-      this.provider.value.registerQuote(this);
-      data = this.provider.value.getQuote();
+      this.provider.value.registerQuote(this.ticker, this);
+      data = this.provider.value.getQuote(this.ticker);
     }
 
-    const { ticker, name, market, price, change } = data;
-    this._ticker = ticker || "-";
+    // format result
+    const { name, market, price, change } = data;
     this._name = name || "--";
     this._market = market;
     this._price = price || 0.0;
@@ -99,10 +95,10 @@ export class Quote extends WidgetBase(LitElement) {
     }
 
     const contents = html!`
-      <div key=${this._ticker} class="col">
+      <div key=${this.ticker} class="col">
         <div class="row">
           <span class="name mr5">${this._name}</span>
-          (<span class="ticker bold">${this._ticker}</span>)
+          (<span class="ticker bold">${this.ticker}</span>)
         </div>
         <div class="row">
           <span class="market mr5">${this._market}</span>

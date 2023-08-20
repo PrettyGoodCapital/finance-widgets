@@ -1,24 +1,17 @@
 import { html, css, unsafeCSS, LitElement } from "lit";
 import { property } from "lit/decorators.js";
-import { ContextConsumer } from "@lit-labs/context";
-import { createIfNotDefined, ChartMiniData, SingleProviderContext } from "@finance-widgets/core";
-
-import { WidgetBase, baseStyle } from "@finance-widgets/core-ui";
+import { createIfNotDefined, ChartMiniData } from "@finance-widgets/core";
+import { SingleProviderConsumer, baseStyle } from "@finance-widgets/core-ui";
 import * as d3 from "d3";
 import * as fc from "d3fc";
 
 import sparkStyle from "./spark.css";
 
-export class Spark extends WidgetBase(LitElement) {
+export class Spark extends SingleProviderConsumer(LitElement) {
   static styles = [baseStyle, css!`${unsafeCSS(sparkStyle)}`];
 
   @property({ type: Object })
   data: ChartMiniData = null;
-
-  provider = new ContextConsumer(this, {
-    context: SingleProviderContext,
-    subscribe: true,
-  });
 
   @property({ type: String })
   color: string = "--sl-color-primary-500";
@@ -40,11 +33,16 @@ export class Spark extends WidgetBase(LitElement) {
   draw() {
     let data = this.data;
 
+    // get ticker from provider if provided
+    this.ticker = this.getTicker();
+
+    // get data from provider if provided
     if (this.provider.value) {
-      this.provider.value.registerSpark(this);
-      data = this.provider.value.getSpark();
+      this.provider.value.registerSpark(this.ticker, this);
+      data = this.provider.value.getSpark(this.ticker);
     }
 
+    // format result
     if (!(data && data.index && data.price)) {
       return;
     }

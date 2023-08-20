@@ -1,23 +1,17 @@
 import { html, css, unsafeCSS, LitElement } from "lit";
 import { property } from "lit/decorators.js";
-import { ContextConsumer } from "@lit-labs/context";
-import { createIfNotDefined, QuoteMiniData, PortfolioProviderContext } from "@finance-widgets/core";
+import { createIfNotDefined, QuoteMiniData } from "@finance-widgets/core";
 
 import { QuoteMini } from "./quote-mini";
-import { WidgetBase, baseStyle } from "../base";
+import { PortfolioProviderConsumer, baseStyle } from "./base";
 
 import tickertapeStyle from "./tickertape.css";
 
-export class TickerTape extends WidgetBase(LitElement) {
+export class TickerTape extends PortfolioProviderConsumer(LitElement) {
   static styles = [baseStyle, css!`${unsafeCSS(tickertapeStyle)}`];
 
   @property({ type: Array<QuoteMiniData> })
   data = [];
-
-  provider = new ContextConsumer(this, {
-    context: PortfolioProviderContext,
-    subscribe: true,
-  });
 
   @property({ type: Number })
   delay = 25;
@@ -32,23 +26,26 @@ export class TickerTape extends WidgetBase(LitElement) {
   color_neutral = "var(--sl-color-neutral-500)";
 
   updateData(ticker: string, newPrice: number, newChange: number) {
-    const elements = this.renderRoot.querySelectorAll(`fw-quote-mini[key="${ticker}"]`);
+    const elements = this.renderRoot.querySelectorAll(`fw-quote-mini[ticker="${ticker}"]`);
     elements.forEach((elem: QuoteMini) => elem.updateData(newPrice, newChange));
   }
 
   render() {
-    let data;
+    let data = this.data;
+
+    // get ticker from provider if provided
+    this.tickers = this.getTickers();
+
+    // get data from provider if provided
     if (this.provider.value) {
-      // register self with provider
-      this.provider.value.registerTickerTape(this);
-      data = this.provider.value.getTickerTape();
-    } else {
-      data = this.data;
+      this.provider.value.registerTickerTape(this.tickers, this);
+      data = this.provider.value.getTickerTape(this.tickers);
     }
 
+    // format result
     const contents = data.map((datum: QuoteMiniData) => {
       const { ticker } = datum;
-      return html!`<fw-quote-mini key=${ticker} data=${JSON.stringify(datum)} color_positive="${
+      return html!`<fw-quote-mini key=${ticker} ticker=${ticker} data=${JSON.stringify(datum)} color_positive="${
         this.color_positive
       }" color_neutral="${this.color_neutral}" color_negative="${this.color_negative}"/></fw-quote-mini>`;
     });

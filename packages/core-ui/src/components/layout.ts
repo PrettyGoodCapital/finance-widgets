@@ -1,7 +1,7 @@
 import { html, LitElement } from "lit";
 import { property } from "lit/decorators.js";
 import { createIfNotDefined } from "@finance-widgets/core";
-import { WidgetBase, baseStyle } from "../base";
+import { WidgetBase, baseStyle } from "./base";
 
 export class Layout extends WidgetBase(LitElement) {
   static styles = [baseStyle];
