@@ -1,0 +1,157 @@
+<div class="page-content">
+  <h1>Ticker Tape</h1>
+
+  <sl-alert open>
+    <sl-icon slot="icon" name="info-circle"></sl-icon>
+    This library is in pre-alpha stage and is not yet suitable for production usage.
+  </sl-alert>
+
+  <fw-utils-codeusage code="<fw-tickertape
+  data='[{&quot;ticker&quot;: &quot;ABC.N&quot;, &quot;price&quot;: 1.23, &quot;change&quot;: 0.1},
+         {&quot;ticker&quot;: &quot;DEF.N&quot;, &quot;price&quot;: 45.67, &quot;change&quot;: 0.25},
+         {&quot;ticker&quot;: &quot;GHI.N&quot;, &quot;price&quot;: 89.1, &quot;change&quot;: -0.3}]'>
+</fw-tickertape>">
+    <div class="description" slot="description">
+      <div>
+        <p>
+          A scrolling ticker-tape component. Displays a tuple of <code>(string, number1, arrow, number2)</code>, where <code>arrow</code> will be up if <code>number2 > 0</code>, flat if <code>number2 == 0</code>, otherwise down.
+          The <code>string</code> will show as bold, while the colors of the arrows are controlled by their corresponding attributes. Note that the attributes <code>tickers</code>, <code>prices</code>, and <code>changes</code> should all
+          be arrays of the same length.
+        </p>
+      </div>
+      <div>
+        <h4 class="bold mt10">Types</h4>
+        <ul>
+          <li>
+            <div class="attributes">
+              <a href="#quotemini">
+
+                <span class="code">
+                  QuoteMiniData
+                </span>
+              </a>
+            </div>
+          </li>
+        </ul>
+
+        <h4 class="bold mt10">Properties</h4>
+        <ul>
+          <li>
+            <div class="attributes">
+              <span class="bold">
+                data
+              </span>
+              <code>
+                Array&lt;QuoteMiniData&gt;
+              </code>
+              <span>
+                The data.
+              </span>
+            </div>
+          </li>
+
+          <li>
+            <div class="attributes">
+              <span class="bold">
+                delay
+              </span>
+              <code>
+                Number
+              </code>
+              <span>
+                Controls the scroll speed of the tickertape, leave blank for automatic calculation based on the number of elements.
+              </span>
+            </div>
+          </li>
+
+          <li>
+            <div class="attributes">
+              <span class="bold">
+                color_positive
+              </span>
+              <code>
+                String
+              </code>
+              <span>
+                Controls the color of the positive indicator, defaults to <code>"var(--sl-color-success-500)"</code>
+              </span>
+            </div>
+          </li>
+
+          <li>
+            <div class="attributes">
+              <span class="bold">
+                color_negative
+              </span>
+              <code>
+                String
+              </code>
+              <span>
+                Controls the color of the positive indicator, defaults to <code>"var(--sl-color-danger-500)"</code>
+              </span>
+            </div>
+          </li>
+
+          <li>
+            <div class="attributes">
+              <span class="bold">
+                color_neutral
+              </span>
+              <code>
+                String
+              </code>
+              <span>
+                Controls the color of the positive indicator, defaults to <code>"var(--sl-color-neutral-500)"</code>
+              </span>
+            </div>
+          </li>
+        </ul>
+
+        <h4 class="bold mt10">Methods</h4>
+        <ul>
+          <li>
+            <div class="attributes">
+              <span class="code">
+                updateData(ticker, newPrice, newChange)
+              </span>
+            </div>
+            <ul>
+              <li>
+                <div class="attributes">
+                  <span class="bold">
+                    ticker
+                  </span>
+                  <code>
+                    string
+                  </code>
+                </div>
+              </li>
+              <li>
+                <div class="attributes">
+                  <span class="bold">
+                    newPrice
+                  </span>
+                  <code>
+                    number
+                  </code>
+                </div>
+              </li>
+              <li>
+                <div class="attributes">
+                  <span class="bold">
+                    newChange
+                  </span>
+                  <code>
+                    number
+                  </code>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+    <fw-tickertape slot="example" data='[{"ticker": "ABC.N", "price": 1.23, "change": 0.1}, {"ticker": "DEF.N", "price": 45.67, "change": 0.25}, {"ticker": "GHI.N", "price": 89.1,"change": -0.3}]'></fw-tickertape>
+  </fw-utils-codeusage>
+</div>
