@@ -1,4 +1,3 @@
-import { createContext } from "@lit-labs/context";
 import { BaseProvider } from "./base";
 import { QuoteMiniData } from "../types";
 
@@ -10,14 +9,15 @@ export enum ProvidesPortfolioTarget {}
 
 export interface PortfolioProvider extends BaseProvider {
   providesPortfolio: () => ProvidesPortfolio[];
-  registerTickerTape: (tickerTapeElement: HTMLElement) => void;
-  getTickerTape: () => Array<QuoteMiniData>;
+  tickers: () => string[];
+
+  /* core */
+  registerTickerTape: (tickers: string[], tickerTapeElement: HTMLElement) => void;
+  getTickerTape: (tickers: string[]) => Array<QuoteMiniData> | undefined;
+  /* charts */
 }
 
 export interface PortfolioTargetProvider extends BaseProvider {
   providesPortfolioTarget: () => ProvidesPortfolioTarget[];
+  tickerTargets: () => string[];
 }
-
-/* https://lit.dev/docs/data/context/ */
-export const PortfolioProviderContext = createContext<PortfolioProvider>("portfolioprovider");
-export const PortfolioTargetProviderContext = createContext<PortfolioTargetProvider>("portfoliotargetprovider");

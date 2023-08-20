@@ -12,6 +12,13 @@ h1, h2, h3, h4, h5, h6, p, span {
     padding: 0;
 }
 
+pre {
+    font-family: var(--sl-font-mono);
+    font-size: var(--sl-font-size-small);
+    margin: 0;
+    padding: 0;
+}
+
 ul {
     display: flex;
     flex-direction: column;
@@ -111,7 +118,7 @@ div.nav {
 .page-container {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .page {

@@ -6,6 +6,12 @@ import {
   Quote,
   QuoteMini,
   WidgetBase,
+  SingleProviderConsumer,
+  PortfolioProviderConsumer,
+  SingleProviderContext,
+  SingleTargetProviderContext,
+  PortfolioProviderContext,
+  PortfolioTargetProviderContext,
   baseStyle,
 } from "../src";
 
@@ -19,6 +25,25 @@ describe("Core UI", () => {
   test("Existence - WidgetBase", async () => {
     expect(WidgetBase).toBeDefined();
   });
+  test("Existence - SingleProviderConsumer", async () => {
+    expect(SingleProviderConsumer).toBeDefined();
+  });
+  test("Existence - PortfolioProviderConsumer", async () => {
+    expect(PortfolioProviderConsumer).toBeDefined();
+  });
+  test("Existence - SingleProviderContext", async () => {
+    expect(SingleProviderContext).toBeDefined();
+  });
+  test("Existence - SingleTargetProviderContext", async () => {
+    expect(SingleTargetProviderContext).toBeDefined();
+  });
+  test("Existence - PortfolioProviderContext", async () => {
+    expect(PortfolioProviderContext).toBeDefined();
+  });
+  test("Existence - PortfolioTargetProviderContext", async () => {
+    expect(PortfolioTargetProviderContext).toBeDefined();
+  });
+
 
   test("Existence - Tickertape", async () => {
     expect(TickerTape).toBeDefined();

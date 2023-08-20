@@ -13,42 +13,52 @@
     </p>
     
     <div slot="example">
-      <div>
-        <p>Example Quote + Spark
-            <pre class="code">
-  &lt;fw-random-provider-context&gt;
-    &lt;sl-card class="card-basic" style="min-width: 360px;"&gt;
-      &lt;div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between;"&gt;
-        &lt;fw-quote&gt;&lt;/fw-quote&gt;
-        &lt;fw-spark&gt;&lt;/fw-spark&gt;
-      &lt;/div&gt;
-    &lt;/sl-card&gt;
-  &lt;/fw-random-provider-context&gt;
-            </pre>
-        </p>
-        <fw-random-provider-context>
+      <fw-random-provider-context>
+        <div>
+          <p>Example Quote Mini</p>
+          <pre class="code">
+&lt;fw-random-provider-context&gt;
+  &lt;sl-card class="card-basic"&gt;
+    &lt;fw-quote-mini&gt;&lt;/fw-quote-mini&gt;
+  &lt;/sl-card&gt;
+&lt;/fw-random-provider-context&gt;
+          </pre>
+          <sl-card class="card-basic">
+            <fw-quote-mini></fw-quote-mini>
+          </sl-card>
+        </div>
+        <div>
+          <p>Example Quote + Spark</p>
+          <pre class="code">
+&lt;fw-random-provider-context&gt;
+  &lt;sl-card class="card-basic" style="min-width: 360px;"&gt;
+    &lt;div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between;"&gt;
+      &lt;fw-quote&gt;&lt;/fw-quote&gt;
+      &lt;fw-spark&gt;&lt;/fw-spark&gt;
+    &lt;/div&gt;
+  &lt;/sl-card&gt;
+&lt;/fw-random-provider-context&gt;
+          </pre>
           <sl-card class="card-basic" style="min-width: 350px;">
             <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between;">
               <fw-quote orient="vertical"></fw-quote>
               <fw-spark></fw-spark>
             </div>
           </sl-card>
-        </fw-random-provider-context>
-        <!-- <fw-provider-context id="randomproviderinstance"></fw-provider-context> -->
-      </div>
-      <div>
-        <p>Example tickertape (portfolio component)
-            <pre class="code">
-  &lt;fw-random-provider-context&gt;
-    &lt;fw-tickertape&gt;&lt;/fw-tickertape&gt;
-  &lt;/fw-random-provider-context&gt;
-            </pre>
-        </p>
-        <fw-random-provider-context>
+        </div>
+      </fw-random-provider-context>
+      <fw-random-provider-context>
+        <div>
+          <p>Example tickertape (portfolio component)</p>
+          <pre class="code">
+&lt;fw-random-provider-context&gt;
+  &lt;fw-tickertape&gt;&lt;/fw-tickertape&gt;
+&lt;/fw-random-provider-context&gt;
+          </pre>
           <fw-tickertape></fw-tickertape>
-        </fw-random-provider-context>
-        <!-- <fw-provider-context id="randomproviderinstance"></fw-provider-context> -->
+          <!-- <fw-provider-context id="randomproviderinstance"></fw-provider-context> -->
+        </div>
       </div>
-    </div>
+    </fw-random-provider-context>
   </fw-utils-codeusage>
 </div>
