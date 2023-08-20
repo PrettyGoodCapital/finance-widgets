@@ -99,21 +99,18 @@ export class RandomProvider implements SingleProvider, PortfolioProvider {
   refresh() {
     this._gendata();
     this._tickertapes.forEach((tt) => {
-      for (const datum of this._stocks.values()) {
-        const { ticker, price, change } = datum;
-        tt.updateData(ticker, price, change);
-      }
+      tt.updateData([...this._stocks.values()]);
     });
     this._quotes.forEach((q) => {
-      const { price, change } = this._stocks.get(this._ticker);
+      const datum = this._stocks.get(this._ticker);
       if (q.ticker === this._ticker) {
-        q.updateData(price, change);
+        q.updateData(datum);
       }
     });
     this._quoteminis.forEach((q) => {
-      const { price, change } = this._stocks.get(this._ticker);
+      const datum = this._stocks.get(this._ticker);
       if (q.ticker === this._ticker) {
-        q.updateData(price, change);
+        q.updateData(datum);
       }
     });
     this._sparks.forEach((s) => {
@@ -135,24 +132,24 @@ export class RandomProvider implements SingleProvider, PortfolioProvider {
     return this._ticker;
   }
 
-  registerQuote(ticker: string, quoteElement: Quote) {
+  async registerQuote(ticker: string, quoteElement: Quote) {
     this._quotes.set(ticker, quoteElement);
   }
-  getQuote(ticker: string): QuoteData {
+  async getQuote(ticker: string): Promise<QuoteData> {
     // return array of 25 elements that tick every 1s
     return this._stocks.get(ticker);
   }
-  registerQuoteMini(ticker: string, quoteMiniElement: QuoteMini) {
+  async registerQuoteMini(ticker: string, quoteMiniElement: QuoteMini) {
     this._quoteminis.set(ticker, quoteMiniElement);
   }
-  getQuoteMini(ticker: string): QuoteMiniData {
+  async getQuoteMini(ticker: string): Promise<QuoteMiniData> {
     // return array of 25 elements that tick every 1s
     return this._stocks.get(ticker);
   }
-  registerSpark(ticker: string, sparkElement: Spark) {
+  async registerSpark(ticker: string, sparkElement: Spark) {
     this._sparks.set(ticker, sparkElement);
   }
-  getSpark(ticker: string): ChartMiniData {
+  async getSpark(ticker: string): Promise<ChartMiniData> {
     // return some random data
     return { ticker, price: randomSeries(100), index: Array.from(Array(100).keys()) };
   }
@@ -162,11 +159,11 @@ export class RandomProvider implements SingleProvider, PortfolioProvider {
     return [...this._stocks.keys()];
   }
 
-  registerTickerTape(tickers: string[], tickerTapeElement: TickerTape) {
+  async registerTickerTape(tickers: string[], tickerTapeElement: TickerTape) {
     this._tickertapes.push(tickerTapeElement);
   }
 
-  getTickerTape(): Array<QuoteMiniData> {
+  async getTickerTape(): Promise<Array<QuoteMiniData>> {
     // return array of 25 elements that tick every 1s
     this._gendata();
     return [...this._stocks.values()];

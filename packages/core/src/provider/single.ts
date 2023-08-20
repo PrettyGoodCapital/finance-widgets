@@ -14,17 +14,17 @@ export interface SingleProvider extends BaseProvider {
   ticker: () => string;
 
   /* core */
-  registerQuote: (ticker: string, quoteElement: HTMLElement) => void;
-  getQuote: (ticker: string) => QuoteData | undefined;
-  registerQuoteMini: (ticker: string, quoteMiniElement: HTMLElement) => void;
-  getQuoteMini: (ticker: string) => QuoteMiniData | undefined;
+  registerQuote: (ticker: string, quoteElement: HTMLElement) => Promise<void>;
+  getQuote: (ticker: string) => Promise<QuoteData> | undefined;
+  registerQuoteMini: (ticker: string, quoteMiniElement: HTMLElement) => Promise<void>;
+  getQuoteMini: (ticker: string) => Promise<QuoteMiniData> | undefined;
 
   /* charts */
-  registerSpark: (ticker: string, sparkElement: HTMLElement) => void;
-  getSpark: (ticker: string) => ChartMiniData | undefined;
+  registerSpark: (ticker: string, sparkElement: HTMLElement) => Promise<void>;
+  getSpark: (ticker: string) => Promise<ChartMiniData> | undefined;
 }
 
 export interface SingleTargetProvider extends BaseProvider {
-  providesSingleTarget: () => ProvidesSingleTarget[];
+  providesSingleTarget: () => ProvidesSingleTarget[] | undefined;
   tickerTarget: () => string;
 }

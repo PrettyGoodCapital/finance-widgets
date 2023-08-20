@@ -34,7 +34,11 @@
         "@finance-widgets/core-charts": "^0.1.0",
         "@finance-widgets/core-ui": "^0.1.0",
         "@finance-widgets/provider": "^0.1.0",
-        "@finance-widgets/utilities": "^0.1.0"
+        "@finance-widgets/provider-perspective": "^0.1.0",
+        "@finance-widgets/utilities": "^0.1.0",
+        "@finos/perspective": "^2.5.0",
+        "@finos/perspective-viewer": "^2.5.0",
+        "@finos/perspective-viewer-datagrid": "^2.5.0"
     }
   }
   

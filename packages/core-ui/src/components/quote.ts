@@ -1,5 +1,6 @@
 import { html, css, unsafeCSS, LitElement } from "lit";
 import { property, state } from "lit/decorators.js";
+import { until } from "lit-html/directives/until.js";
 import { createIfNotDefined, formatNumber, QuoteData } from "@finance-widgets/core";
 import { SingleProviderConsumer, baseStyle } from "./base";
 
@@ -46,26 +47,21 @@ export class Quote extends SingleProviderConsumer(LitElement) {
     this.requestUpdate();
   }
 
-  updateData(newPrice: number, newChange: number) {
-    this._price = newPrice;
-    this._change = newChange;
+  updateData(data: QuoteData) {
+    const { price, change } = data;
+    this._price = price;
+    this._change = change;
     this._updateData();
   }
 
-  render() {
-    let data = this.data;
+  async registerAndRender() {
+    await this.provider.value.registerQuote(this.ticker, this);
+    this.data = await this.provider.value.getQuote(this.ticker);
+    return this.format();
+  }
 
-    // get ticker from provider if provided
-    this.ticker = this.getTicker();
-
-    // get data from provider if provided
-    if (this.provider.value) {
-      this.provider.value.registerQuote(this.ticker, this);
-      data = this.provider.value.getQuote(this.ticker);
-    }
-
-    // format result
-    const { name, market, price, change } = data;
+  format() {
+    const { name, market, price, change } = this.data;
     this._name = name || "--";
     this._market = market;
     this._price = price || 0.0;
@@ -123,6 +119,18 @@ export class Quote extends SingleProviderConsumer(LitElement) {
       </style>
       <div>${contents}</div>
     `;
+  }
+
+  render() {
+    // get ticker from provider if provided
+    this.ticker = this.getTicker();
+
+    // get data from provider if provided
+    if (this.provider.value) {
+      return html!`${until(this.registerAndRender(), this.loadingBar())}`;
+    }
+    // format result
+    return this.format();
   }
 }
 

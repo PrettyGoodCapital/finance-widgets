@@ -605,6 +605,24 @@
   resolved "https://registry.yarnpkg.com/@faker-js/faker/-/faker-8.0.2.tgz#bab698c5d3da9c52744e966e0e3eedb6c8b05c37"
   integrity sha512-Uo3pGspElQW91PCvKSIAXoEgAUlRnH29sX2/p89kg7sP1m2PzCufHINd0FhTXQf6DYGiUlVncdSPa2F9wxed2A==
 
+"@finos/perspective-viewer-datagrid@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@finos/perspective-viewer-datagrid/-/perspective-viewer-datagrid-2.5.0.tgz#3aebf9116bb49ce9eb8f68e924ed483a1415112c"
+  integrity sha512-PD5hnGvbrtyIDY2wSL+TOFo4I+gi1qxbDMwze8RvCNE8WSo2auCzevAzaWL/L6qScPccvQ7h0dqz1AmeslH2Kg==
+  dependencies:
+    "@finos/perspective" "^2.5.0"
+    "@finos/perspective-viewer" "^2.5.0"
+    chroma-js "^1.3.4"
+    regular-table "=0.5.9"
+
+"@finos/perspective-viewer@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@finos/perspective-viewer/-/perspective-viewer-2.5.0.tgz#bbe232778b850d5ad5bce9efe51b0210b1c08f0e"
+  integrity sha512-ArWHbKABGQ0MD2upluazwWGsxGkPOVn5wXP+lPlqGsz+itpYD/EBND5pdfVRUpUvr8WfU2H9nmaTMBsw8/H5Xg==
+  dependencies:
+    "@finos/perspective" "^2.5.0"
+    fflate "^0.7.4"
+
 "@finos/perspective@^2.5.0":
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/@finos/perspective/-/perspective-2.5.0.tgz#590cbedac0768b0ce82e3276f3b602de8a908058"
@@ -1715,6 +1733,11 @@ char-regex@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/char-regex/-/char-regex-1.0.2.tgz#d744358226217f981ed58f479b1d6bcc29545dcf"
   integrity sha512-kWWXztvZ5SBQV+eRgKFeh8q5sLuZY2+8WUIzlxWVTg+oGwY14qylx1KbKzHd8P6ZYkAg0xyIDU9JMHhyJMZ1jw==
+
+chroma-js@^1.3.4:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/chroma-js/-/chroma-js-1.4.1.tgz#eb2d9c4d1ff24616be84b35119f4d26f8205f134"
+  integrity sha512-jTwQiT859RTFN/vIf7s+Vl/Z2LcMrvMv3WUFmd/4u76AdlFC0NTNgqEEFPcRiHmAswPsMiQEDZLM8vX8qXpZNQ==
 
 ci-info@^3.2.0:
   version "3.8.0"
@@ -4742,6 +4765,11 @@ regexp.prototype.flags@^1.5.0:
     call-bind "^1.0.2"
     define-properties "^1.2.0"
     functions-have-names "^1.2.3"
+
+regular-table@=0.5.9:
+  version "0.5.9"
+  resolved "https://registry.yarnpkg.com/regular-table/-/regular-table-0.5.9.tgz#a5bfeeb67e3bcc9ab4e9f11cd9c3a40777267aa9"
+  integrity sha512-Ck5HYNS7lzsxsDWDBYzrCpwM1wsp5fMY42Ks730Otwq2U+XAlARJMg2tRexy+V8bLy9wiq+SH8EMC/yKqccLCA==
 
 require-directory@^2.1.1:
   version "2.1.1"

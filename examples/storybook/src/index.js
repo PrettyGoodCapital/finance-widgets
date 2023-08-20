@@ -3,8 +3,14 @@ import "@finance-widgets/core-ui";
 import "@finance-widgets/core-charts";
 import "@finance-widgets/provider";
 import "@finance-widgets/utilities";
+import perspective from "@finos/perspective";
+import "@finos/perspective-viewer";
+import "@finos/perspective-viewer-datagrid";
+import "@finos/perspective-viewer/dist/css/themes.css";
 import "./index.css";
 
+import { ProvidesSingle } from "@finance-widgets/core";
+import { PerspectiveProvider } from "@finance-widgets/provider-perspective";
 import { version } from "../package.json";
 
 window.switchTheme = () => {
@@ -17,6 +23,63 @@ window.switchTheme = () => {
     document.documentElement.classList.remove("sl-theme-dark");
     document.documentElement.classList.add("sl-theme-light");
   }
+};
+
+const perspectiveData = {
+  ticker: ["ABC.N", "DEF.N", "GHI.N"],
+  price: [1.23, 45.67, 89.1],
+  change: [0.1, 0.25, -0.3],
+};
+
+window.setupPerspectiveContext = async () => {
+  // Setup Perspective Table
+  const worker = perspective.worker();
+  const quoteTable = await worker.table(perspectiveData);
+  const perspectiveViewer = document.getElementById("perspective-example-viewer");
+  perspectiveViewer.load(quoteTable);
+  perspectiveViewer.restore({ plugin_config: { editable: true } });
+
+  let views = new Map();
+  for (let ticker of perspectiveData.ticker) {
+    views.set(ticker, await quoteTable.view({ filter: [["ticker", "==", ticker]] }));
+  }
+
+  // Setup perspective provider, connect to table
+  const perspectiveProvider = new PerspectiveProvider(
+    { single: { [ProvidesSingle.QuoteMini]: quoteTable } },
+    {
+      single: {
+        [ProvidesSingle.QuoteMini]: async (that, ticker) => {
+          const view = views.get(ticker);
+          const data = await view.to_json();
+          return data[0];
+        },
+      },
+    },
+    {
+      single: {
+        [ProvidesSingle.QuoteMini]: async (that, ticker) => {
+          const view = views.get(ticker);
+          return view.on_update.bind(view);
+        },
+      },
+    },
+  );
+  const perspectiveContext = document.getElementById("perspective-provider-context");
+  perspectiveContext.singleprovider.setValue(perspectiveProvider);
+
+  const quoteMiniContainer = document.getElementById("perspective-quote-minis");
+  perspectiveData.ticker.forEach((ticker) => {
+    // create the element
+    const qm = document.createElement("fw-quote-mini");
+    qm.setAttribute("ticker", ticker);
+
+    // Attach to perspective provider
+    perspectiveProvider.registerQuoteMini(ticker, qm);
+
+    // Attach to DOM
+    quoteMiniContainer.appendChild(qm);
+  });
 };
 
 document.addEventListener("DOMContentLoaded", () => {
