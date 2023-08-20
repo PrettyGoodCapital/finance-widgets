@@ -50,7 +50,10 @@ export class QuoteMini extends SingleProviderConsumer(LitElement) {
   }
 
   format() {
-    const { price, change } = this.data;
+    const { ticker, price, change } = this.data;
+    if (ticker && !this.ticker) {
+      this.ticker = ticker;
+    }
     this._price = price;
     this._change = change;
 

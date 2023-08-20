@@ -61,7 +61,10 @@ export class Quote extends SingleProviderConsumer(LitElement) {
   }
 
   format() {
-    const { name, market, price, change } = this.data;
+    const { ticker, name, market, price, change } = this.data;
+    if (ticker && !this.ticker) {
+      this.ticker = ticker;
+    }
     this._name = name || "--";
     this._market = market;
     this._price = price || 0.0;
