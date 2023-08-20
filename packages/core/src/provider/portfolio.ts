@@ -8,12 +8,12 @@ export enum ProvidesPortfolio {
 export enum ProvidesPortfolioTarget {}
 
 export interface PortfolioProvider extends BaseProvider {
-  providesPortfolio: () => ProvidesPortfolio[];
+  providesPortfolio: () => ProvidesPortfolio[] | undefined;
   tickers: () => string[];
 
   /* core */
-  registerTickerTape: (tickers: string[], tickerTapeElement: HTMLElement) => void;
-  getTickerTape: (tickers: string[]) => Array<QuoteMiniData> | undefined;
+  registerTickerTape: (tickers: string[], tickerTapeElement: HTMLElement) => Promise<void>;
+  getTickerTape: (tickers: string[]) => Promise<Array<QuoteMiniData>> | undefined;
   /* charts */
 }
 

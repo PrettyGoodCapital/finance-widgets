@@ -204,3 +204,22 @@ div.description > * {
 .mt10 {
     margin-top: 10px;
 }
+
+.perspective-container {
+    height: 150px;
+    width: 200px;
+    margin: 15px 0;
+    padding: 0;
+}
+
+.perspective-container > perspective-viewer {
+    height: 100%;
+    width: 100%;
+}
+
+.perspective-quote-minis-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}

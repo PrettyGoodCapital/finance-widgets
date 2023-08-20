@@ -30,7 +30,7 @@ export class Spark extends SingleProviderConsumer(LitElement) {
     container.requestRedraw();
   }
 
-  draw() {
+  async draw() {
     let data = this.data;
 
     // get ticker from provider if provided
@@ -38,8 +38,8 @@ export class Spark extends SingleProviderConsumer(LitElement) {
 
     // get data from provider if provided
     if (this.provider.value) {
-      this.provider.value.registerSpark(this.ticker, this);
-      data = this.provider.value.getSpark(this.ticker);
+      await this.provider.value.registerSpark(this.ticker, this);
+      data = await this.provider.value.getSpark(this.ticker);
     }
 
     // format result
@@ -100,6 +100,7 @@ export class Spark extends SingleProviderConsumer(LitElement) {
       });
     this.redraw();
   }
+
   render() {
     return html`
       <div class="chart">

@@ -61,7 +61,7 @@
 
           <ul class="component-list">
             <li>
-              <a href="#test">Test</a>
+              <a href="#todo">TODO</a>
             </li>
           </ul>
 
@@ -74,6 +74,12 @@
           <ul class="component-list">
             <li>
               <a href="#randomprovider">RandomProvider</a>
+            </li>
+            <li>
+              <a href="#perspectiveprovider">PerspectiveProvider</a>
+            </li>
+            <li>
+              <a href="#restprovider">RestProvider</a>
             </li>
             <li>
               <a href="#polygonprovider">PolygonProvider</a>
@@ -134,13 +140,21 @@
           </div>
 
           <!-- Child Pages / Order Entry -->
-          <div id="test" class="page">
-            <sl-include src="pages/orderentry/test.html"></sl-include>
+          <div id="todo" class="page">
+            <sl-include src="pages/todo.html"></sl-include>
           </div>
 
           <!-- Child Pages / Provider -->
           <div id="randomprovider" class="page">
             <sl-include src="pages/providers/random.html" allow-scripts="True"></sl-include>
+          </div>
+
+          <div id="perspectiveprovider" class="page">
+            <sl-include src="pages/providers/perspective.html" allow-scripts="True"></sl-include>
+          </div>
+
+          <div id="restprovider" class="page">
+            <sl-include src="pages/providers/rest.html" allow-scripts="True"></sl-include>
           </div>
 
           <div id="polygonprovider" class="page">

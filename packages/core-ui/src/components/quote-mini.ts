@@ -1,5 +1,6 @@
 import { html, css, unsafeCSS, LitElement } from "lit";
 import { property, state } from "lit/decorators.js";
+import { until } from "lit-html/directives/until.js";
 import { createIfNotDefined, QuoteMiniData } from "@finance-widgets/core";
 import { SingleProviderConsumer, baseStyle } from "./base";
 
@@ -35,39 +36,34 @@ export class QuoteMini extends SingleProviderConsumer(LitElement) {
     this.requestUpdate();
   }
 
-  updateData(newPrice: number, newChange: number) {
-    this._price = newPrice;
-    this._change = newChange;
+  updateData(data: QuoteMiniData) {
+    const { price, change } = data;
+    this._price = price;
+    this._change = change;
     this._updateData();
   }
 
-  render() {
-    let data = this.data;
+  async registerAndRender() {
+    await this.provider.value.registerQuoteMini(this.ticker, this);
+    this.data = await this.provider.value.getQuoteMini(this.ticker);
+    return this.format();
+  }
 
-    // get ticker from provider if provided
-    this.ticker = this.getTicker();
-
-    // get data from provider if provided
-    if (this.provider.value) {
-      this.provider.value.registerQuoteMini(this.ticker, this);
-      data = this.provider.value.getQuoteMini(this.ticker);
-    }
-
-    // format result
-    const { price, change } = data;
+  format() {
+    const { price, change } = this.data;
     this._price = price;
     this._change = change;
 
     const contents = html!`
-      <div class="row">
-        <span class="ticker bold">${this.ticker}</span>
-        <span class="price">${this._price.toFixed(2)}</span>
-        <span class="icon row ${
-          this._change === 0 ? "trending-flat" : this._change > 0 ? "trending-up" : "trending-down"
-        } ${this._change === 0 ? "indicator-neutral" : this._change > 0 ? "indicator-positive" : "indicator-negative"}
-        "></span>
-        <span class="change">${Math.abs(this._change).toFixed(2)}</span>
-      </div>`;
+    <div class="row">
+      <span class="ticker bold">${this.ticker}</span>
+      <span class="price">${this._price.toFixed(2)}</span>
+      <span class="icon row ${
+        this._change === 0 ? "trending-flat" : this._change > 0 ? "trending-up" : "trending-down"
+      } ${this._change === 0 ? "indicator-neutral" : this._change > 0 ? "indicator-positive" : "indicator-negative"}
+      "></span>
+      <span class="change">${Math.abs(this._change).toFixed(2)}</span>
+    </div>`;
     return html`
       <style>
         .indicator-positive {
@@ -85,6 +81,22 @@ export class QuoteMini extends SingleProviderConsumer(LitElement) {
       </style>
       <div>${contents}</div>
     `;
+  }
+
+  render() {
+    // get ticker from provider if provided
+    this.ticker = this.getTicker();
+
+    // get data from provider if provided
+    if (this.provider.value) {
+      return html!`${until(this.registerAndRender(), this.loadingBar())}`;
+    }
+    if (!this.data) {
+      return "";
+    }
+
+    // format result
+    return this.format();
   }
 }
 

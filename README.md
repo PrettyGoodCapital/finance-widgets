@@ -26,6 +26,7 @@ The following providers are supported natively through `@finance-widgets/provide
 | Provider         | Description           |
 |:-----------------|:----------------------|
 | `RandomProvider` | Random data generator |
+| `RestProvider`   | Data from Rest API    |
 
 
 ### External
@@ -34,4 +35,5 @@ The following partners have native data integration
 
 |     | Name | Data | Description | Provider |
 |:---:|:-----|:-----|:------------|:---------|
+| <a href="https://perspective.finos.org/"><img src="https://raw.githubusercontent.com/finos/perspective/master/docs/static/svg/perspective-logo-dark.svg" width="200"></a> | [Perspective](https://perspective.finos.org/) | N/A | Generic binding to [Perspective](https://perspective.finos.org/) tables. | `@finance-widgets/provider-perspective` |
 | <a href="https://polygon.io/"><img src="docs/img/logo.png" width="200"></a> | [Polygon.io](https://polygon.io/) | Equities, Options, Forex, Crypto | Free stock data APIs. Real time and historical data, unlimited usage, tick level and aggregate granularity, in standardized JSON and CSV formats. Plus currencies data, including forex, crypto, and more. | `@finance-widgets/provider-polygon` |

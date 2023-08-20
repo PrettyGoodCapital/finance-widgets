@@ -1,4 +1,4 @@
-import { css, unsafeCSS, LitElement, CSSResult } from "lit";
+import { css, html, unsafeCSS, LitElement, CSSResult, TemplateResult } from "lit";
 import { property } from "lit/decorators.js";
 import { ContextConsumer } from "@lit-labs/context";
 import { SingleProvider, PortfolioProvider } from "@finance-widgets/core";
@@ -10,6 +10,7 @@ type Constructor<T> = new (...args: any[]) => T;
 
 export declare class WidgetBaseInterface {
   static baseStyle: CSSResult;
+  loadingBar: () => TemplateResult<1>;
 }
 
 export const baseStyle = css`
@@ -18,20 +19,23 @@ export const baseStyle = css`
 
 export const WidgetBase = <T extends Constructor<LitElement>>(superClass: T) => {
   class WidgetBaseClass extends superClass {
-    // static styles = [baseStyle];
+    loadingBar() {
+      return html!`<sl-progress-bar indeterminate></sl-progress-bar>`;
+    }
   }
+
   // Cast return type to your mixin's interface intersected with the superClass type
   return WidgetBaseClass as Constructor<WidgetBaseInterface> & T;
 };
 
-export declare class SingleProviderConsumerInterface {
+export declare class SingleProviderConsumerInterface extends WidgetBaseInterface {
   ticker: string;
   provider: ContextConsumer<{ __context__: SingleProvider }, LitElement>;
   getTicker: () => string;
 }
 
 export const SingleProviderConsumer = <T extends Constructor<LitElement>>(superClass: T) => {
-  class SingleProviderConsumerClass extends superClass {
+  class SingleProviderConsumerClass extends WidgetBase(superClass) {
     provider = new ContextConsumer(this, {
       context: SingleProviderContext,
       subscribe: true,
@@ -52,14 +56,14 @@ export const SingleProviderConsumer = <T extends Constructor<LitElement>>(superC
   return SingleProviderConsumerClass as Constructor<SingleProviderConsumerInterface> & T;
 };
 
-export declare class PortfolioProviderConsumerInterface {
+export declare class PortfolioProviderConsumerInterface extends WidgetBaseInterface {
   tickers: string[];
   provider: ContextConsumer<{ __context__: PortfolioProvider }, LitElement>;
   getTickers: () => string[];
 }
 
 export const PortfolioProviderConsumer = <T extends Constructor<LitElement>>(superClass: T) => {
-  class PortfolioProviderConsumerClass extends superClass {
+  class PortfolioProviderConsumerClass extends WidgetBase(superClass) {
     provider = new ContextConsumer(this, {
       context: PortfolioProviderContext,
       subscribe: true,

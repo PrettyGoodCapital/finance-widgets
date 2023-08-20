@@ -1,4 +1,5 @@
 import { html, css, unsafeCSS, LitElement } from "lit";
+import { until } from "lit-html/directives/until.js";
 import { property } from "lit/decorators.js";
 import { createIfNotDefined, QuoteMiniData } from "@finance-widgets/core";
 
@@ -25,25 +26,22 @@ export class TickerTape extends PortfolioProviderConsumer(LitElement) {
   @property({ type: String })
   color_neutral = "var(--sl-color-neutral-500)";
 
-  updateData(ticker: string, newPrice: number, newChange: number) {
-    const elements = this.renderRoot.querySelectorAll(`fw-quote-mini[ticker="${ticker}"]`);
-    elements.forEach((elem: QuoteMini) => elem.updateData(newPrice, newChange));
+  updateData(data: Array<QuoteMiniData>) {
+    data.forEach((datum) => {
+      const { ticker } = datum;
+      const elements = this.renderRoot.querySelectorAll(`fw-quote-mini[ticker="${ticker}"]`);
+      elements.forEach((elem: QuoteMini) => elem.updateData(datum));
+    });
   }
 
-  render() {
-    let data = this.data;
-
-    // get ticker from provider if provided
-    this.tickers = this.getTickers();
-
-    // get data from provider if provided
-    if (this.provider.value) {
-      this.provider.value.registerTickerTape(this.tickers, this);
-      data = this.provider.value.getTickerTape(this.tickers);
-    }
-
+  async registerAndRender() {
+    await this.provider.value.registerTickerTape(this.tickers, this);
+    this.data = await this.provider.value.getTickerTape(this.tickers);
+    return this.format();
+  }
+  format() {
     // format result
-    const contents = data.map((datum: QuoteMiniData) => {
+    const contents = this.data.map((datum: QuoteMiniData) => {
       const { ticker } = datum;
       return html!`<fw-quote-mini key=${ticker} ticker=${ticker} data=${JSON.stringify(datum)} color_positive="${
         this.color_positive
@@ -57,12 +55,29 @@ export class TickerTape extends PortfolioProviderConsumer(LitElement) {
 
         .marquee,
         .marquee2 {
-          --time-delay: ${this.delay * data.length}s;
+          --time-delay: ${this.delay * this.data.length}s;
         }
       </style>
       <div key="0" class="marquee">${contents}</div>
       <div key="1" class="marquee2">${contents}</div>
     `;
+  }
+
+  render() {
+    // get ticker from provider if provided
+    this.tickers = this.getTickers();
+
+    // get data from provider if provided
+    if (this.provider.value) {
+      return html!`${until(this.registerAndRender(), this.loadingBar())}`;
+    }
+
+    if (!this.data.length) {
+      return "";
+    }
+
+    // format result
+    return this.format();
   }
 }
 

@@ -39,7 +39,7 @@ export class CodeBlock extends LitElement {
       <style>
         ${hljsDefaultCss}
       </style>
-      <div class="align-center">
+      <div class="align-center" style="overflow-x: auto;">
         <pre>
         <code id="${this.id}">${unsafeHTML(highlightedCode)}</code>
       </pre>
@@ -63,20 +63,38 @@ export class CodeUsage extends WidgetBase(LitElement) {
   code = "";
 
   render() {
+    let codeBlock;
+    let example;
+
+    if (this.code) {
+      // Use codeblock as center, use example as footer
+      codeBlock = html!`
+      <slot name="code-block">
+        <h4 class="mb10">Usage</h4>
+        <fw-utils-codeblock language="${this.language}" code="${this.code}"></fw-utils-codeblock>
+      </slot>`;
+      example = html!`
+      <div slot="footer">
+        <h4 class="mb10">Example</h4>
+        <slot name="example"></slot>
+      </div>`;
+    } else {
+      // Use example as middle
+      codeBlock = "";
+      example = html!`
+      <div>
+        <h4 class="mb10">Example</h4>
+        <slot name="example"></slot>
+      </div>`;
+    }
+
     return html` <div class="col pt10">
       <sl-card class="card-basic">
         <div class="header" slot="header">
           <h4 class="mb10">Description</h4>
           <slot name="description"></slot>
         </div>
-        <slot name="code-block">
-          <h4 class="mb10">Usage</h4>
-          <fw-utils-codeblock language="${this.language}" code="${this.code}"></fw-utils-codeblock>
-        </slot>
-        <div slot="footer">
-          <h4 class="mb10">Example</h4>
-          <slot name="example"></slot>
-        </div>
+        ${codeBlock}${example}
       </sl-card>
     </div>`;
   }
