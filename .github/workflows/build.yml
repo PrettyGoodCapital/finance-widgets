@@ -74,7 +74,7 @@ jobs:
       if: ${{ matrix.os == 'ubuntu-latest' }}
 
     - name: Upload coverage
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4
 
     - name: Deploy Documentatinoj
       uses: peaceiris/actions-gh-pages@v3
