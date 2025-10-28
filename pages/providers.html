@@ -1,0 +1,40 @@
+<div class="page-content">
+  <h1>Providers</h1>
+  
+  <sl-alert open>
+    <sl-icon slot="icon" name="info-circle"></sl-icon>
+    This library is in pre-alpha stage and is not yet suitable for production usage.
+  </sl-alert>
+  
+  <p>
+    Providers bind data sources/sinks to widgets. They leverage <a href="https://lit.dev/docs/data/context/">Lit's Context</a> in order to manage a subtree of components.
+  </p>
+
+  <p>
+    Providers can implement one or more sets of interfaces, which themselves can be applied to any number of widgets.
+    <ul>
+      <li>
+        <span class="code">Single Component Provider</span> (see <a href="#components">Components</a>) - Provides data about a single asset
+      </li>
+      <li>
+        <span class="code">Portfolio Component Provider</span> (see <a href="#components">Components</a>) - Provides a collection of data, such as quotes for all assets in a basket
+      </li>
+      <li>
+        <span class="code">Single Component Target</span> - Receives a single piece of data, such as a single order to place
+      </li>
+      <li>
+        <span class="code">Portfolio Component Target</span> - Receives a collection of data, such as a basket of orders to place
+      </li>
+    </ul>
+  </p>
+
+
+  <p>
+    Several providers are given for demo purposes, such as the <span class="code">RandomProvider</span>.
+    In general, end users should write their own providers to bind their APIs and data sources to the widgets.
+  </p>
+
+  <p>
+    Some financial data vendors provide robust Data APIs, so this library supports a few of those, such as the <span class="code">PolygonProvider</span>.
+  </p>
+</div>
