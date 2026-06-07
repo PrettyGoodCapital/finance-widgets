@@ -106,3 +106,8 @@ typings/
 # Built assets
 examples/**/dist/
 packages/**/dist/
+
+# AI
+AGENTS.md
+ROADMAP.md
+
