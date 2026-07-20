@@ -1,0 +1,175 @@
+<html class="sl-theme-light">
+  <head>
+    <meta charset="UTF-8">
+    <title>Finance Widgets - Storybook</title>
+    <meta name="description" content="Finance Widgets">
+    <meta name="keywords" content="Finance, Widgets, Javascript, WebComponents, UI">
+    <meta name="author" content="prettygoodcapital">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.7.0/cdn/themes/light.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.7.0/cdn/themes/dark.css" />
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.7.0/cdn/shoelace-autoloader.js"></script>
+    <link rel="stylesheet" href="./dist/index.css">
+    <script type="module" src="./dist/index.js"></script>
+  </head>
+  <body>
+    <sl-icon-button id="themeswitch" onClick="switchTheme()" class="theme" name="sun" label="theme"></sl-icon-button>
+    <sl-icon-button class="github" name="github" label="github" href="https://github.com/prettygoodcapital/finance-widgets"></sl-icon-button>
+    <sl-split-panel class="storybook" position="20" style="--min: 75px; --max: 150px;" disabled>
+      <div class="nav" slot="start">
+        <nav>
+          <div class="overview">
+            <a href="#overview">
+              <h2>Finance Widgets</h2>
+            </a>
+            <span id="version" class="version"></span>
+          </div>
+
+          <sl-divider></sl-divider>
+
+          <a href="#overview">
+            <h4>Overview</h4>
+          </a>
+
+          <sl-divider></sl-divider>
+
+          <a href="#components">
+            <h4>Components</h4>
+          </a>
+
+          <ul class="component-list">
+            <li>
+              <a href="#quotemini">Quote (mini)</a>
+            </li>
+            <li>
+              <a href="#quote">Quote</a>
+            </li>
+            <li>
+              <a href="#spark">Spark</a>
+            </li>
+            <li>
+              <a href="#tickertape">Tickertape</a>
+            </li>
+          </ul>
+
+          <sl-divider></sl-divider>
+
+          <a href="#orderentry">
+            <h4>Order Entry</h4>
+          </a>
+
+          <ul class="component-list">
+            <li>
+              <a href="#todo">TODO</a>
+            </li>
+          </ul>
+
+          <sl-divider></sl-divider>
+
+          <a href="#providers">
+            <h4>Providers</h4>
+          </a>
+
+          <ul class="component-list">
+            <li>
+              <a href="#randomprovider">RandomProvider</a>
+            </li>
+            <li>
+              <a href="#perspectiveprovider">PerspectiveProvider</a>
+            </li>
+            <li>
+              <a href="#restprovider">RestProvider</a>
+            </li>
+            <li>
+              <a href="#polygonprovider">PolygonProvider</a>
+            </li>
+          </ul>
+
+          <sl-divider></sl-divider>
+
+          <a href="#utilities">
+            <h4>Utilities</h4>
+          </a>
+
+          <ul class="component-list">
+            <li>
+              <a href="#codeblock">Code Block</a>
+            </li>
+            <li>
+              <a href="#codeusage">Code Usage</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div slot="end" class="page-container">
+          <!-- Overviews -->
+          <div id="overview" class="page">
+            <sl-include src="pages/overview.html"></sl-include>
+          </div>
+
+          <div id="components" class="page">
+            <sl-include src="pages/components.html"></sl-include>
+          </div>
+
+          <div id="orderentry" class="page">
+            <sl-include src="pages/orderentry.html"></sl-include>
+          </div>
+
+          <div id="providers" class="page">
+            <sl-include src="pages/providers.html"></sl-include>
+          </div>
+          
+          <div id="utilities" class="page">
+            <sl-include src="pages/utilities.html"></sl-include>
+          </div>
+
+          <!-- Child Pages / Components -->
+          <div id="quotemini" class="page">
+            <sl-include src="pages/components/quote-mini.html"></sl-include>
+          </div>
+          <div id="quote" class="page">
+            <sl-include src="pages/components/quote.html"></sl-include>
+          </div>
+          <div id="tickertape" class="page">
+            <sl-include src="pages/components/tickertape.html"></sl-include>
+          </div>
+          <div id="spark" class="page">
+            <sl-include src="pages/components/spark.html"></sl-include>
+          </div>
+
+          <!-- Child Pages / Order Entry -->
+          <div id="todo" class="page">
+            <sl-include src="pages/todo.html"></sl-include>
+          </div>
+
+          <!-- Child Pages / Provider -->
+          <div id="randomprovider" class="page">
+            <sl-include src="pages/providers/random.html" allow-scripts="True"></sl-include>
+          </div>
+
+          <div id="perspectiveprovider" class="page">
+            <sl-include src="pages/providers/perspective.html" allow-scripts="True"></sl-include>
+          </div>
+
+          <div id="restprovider" class="page">
+            <sl-include src="pages/providers/rest.html" allow-scripts="True"></sl-include>
+          </div>
+
+          <div id="polygonprovider" class="page">
+            <sl-include src="pages/providers/polygon.html"></sl-include>
+          </div>
+
+          <!-- Child Pages / Utilities -->
+          <div id="codeblock" class="page">
+            <sl-include src="pages/utilities/codeblock.html"></sl-include>
+          </div>
+
+          <div id="codeusage" class="page">
+            <sl-include src="pages/utilities/codeusage.html"></sl-include>
+          </div>
+      </div>
+    </sl-split-panel>
+  </body>
+</html>
