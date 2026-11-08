@@ -1,0 +1,160 @@
+<div class="page-content">
+  <h1>Quote (mini)</h1>
+
+  <sl-alert open>
+    <sl-icon slot="icon" name="info-circle"></sl-icon>
+    This library is in pre-alpha stage and is not yet suitable for production usage.
+  </sl-alert>
+
+  <fw-utils-codeusage code="<fw-quote-mini data='{&quot;ticker&quot;: &quot;ABC.N&quot;, &quot;price&quot;: 1.23, &quot;change&quot;: 0.1}'></fw-quote-mini>">
+    <div class="description" slot="description">
+      <div>
+        <p>
+          A single, minimal quote.
+        </p>
+      </div>
+      <div>
+        <h4 class="bold mt10">Types</h4>
+        <ul>
+          <li>
+            <div class="attributes">
+              <span class="code">
+                QuoteMiniData
+              </span>
+            </div>
+            <ul>
+              <li>
+                <div class="attributes">
+                  <span class="bold">
+                    ticker
+                  </span>
+                  <code>
+                    string
+                  </code>
+                </div>
+              </li>
+              <li>
+                <div class="attributes">
+                  <span class="bold">
+                    price
+                  </span>
+                  <code>
+                    number
+                  </code>
+                </div>
+              </li>
+              <li>
+                <div class="attributes">
+                  <span class="bold">
+                    change
+                  </span>
+                  <code>
+                    number
+                  </code>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4 class="bold mt10">Properties</h4>
+        <ul>
+          <li>
+            <div class="attributes">
+              <span class="bold">
+                data
+              </span>
+              <code>
+                QuoteMiniData
+              </code>
+              <span>
+                The data.
+              </span>
+            </div>
+          </li>
+
+          <li>
+            <div class="attributes">
+              <span class="bold">
+                color_positive
+              </span>
+              <code>
+                String
+              </code>
+              <span>
+                Controls the color of the positive indicator, defaults to <code>"var(--sl-color-success-500)"</code>
+              </span>
+            </div>
+          </li>
+
+          <li>
+            <div class="attributes">
+              <span class="bold">
+                color_negative
+              </span>
+              <code>
+                String
+              </code>
+              <span>
+                Controls the color of the negative indicator, defaults to <code>"var(--sl-color-danger-500)"</code>
+              </span>
+            </div>
+          </li>
+
+          <li>
+            <div class="attributes">
+              <span class="bold">
+                color_neutral
+              </span>
+              <code>
+                String
+              </code>
+              <span>
+                Controls the color of the neutral indicator, defaults to <code>"var(--sl-color-neutral-500)"</code>
+              </span>
+            </div>
+          </li>
+        </ul>
+
+        <h4 class="bold mt10">Methods</h4>
+        <ul>
+          <li>
+            <div class="attributes">
+              <span class="code">
+                updateData(newPrice, newChange)
+              </span>
+            </div>
+            <ul>
+              <li>
+                <div class="attributes">
+                  <span class="bold">
+                    newPrice
+                  </span>
+                  <code>
+                    number
+                  </code>
+                </div>
+              </li>
+              <li>
+                <div class="attributes">
+                  <span class="bold">
+                    newChange
+                  </span>
+                  <code>
+                    number
+                  </code>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div slot="example">
+      <p>Here shown inside a <span class="code">&lt;sl-card class="card-basic"&gt;</pre></span></p>
+      <sl-card class="card-basic">
+        <fw-quote-mini data='{"ticker": "ABC.N", "price": 1.23, "change": 0.1}'></fw-quote-mini>
+      </sl-card>
+    </div>
+  </fw-utils-codeusage>
+</div>
